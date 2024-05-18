@@ -46,8 +46,15 @@ Skills
   * R
   * SQL
   * Perl
-  * Scalar
+  * Scala
   * Swift
+* Library
+  * PyTorch
+  * PyTorch Geometric
+  * langchain
+* Cloud
+  * AWS
+  * GCP
 
 Publications
 ======
