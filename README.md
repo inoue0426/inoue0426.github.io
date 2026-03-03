@@ -1,4 +1,43 @@
 
+# Automated Publication Updates
+
+The `scripts/update_pubs.py` script automatically fetches papers from
+**Semantic Scholar** (falling back to **Crossref**) and writes them as
+Markdown files into `_publications/`.  Google Scholar scraping is
+intentionally not used.
+
+## Quick Start
+
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Run locally (no API keys required, but optional keys improve rate limits)
+SEMANTIC_SCHOLAR_KEY=<your_key> CROSSREF_EMAIL=<your@email.com> python scripts/update_pubs.py
+
+# Run unit tests
+python -m pytest tests/
+```
+
+## GitHub Secrets
+
+Set the following optional secrets in **Settings → Secrets and variables →
+Actions** to raise API rate limits:
+
+| Secret name            | Description                              |
+|------------------------|------------------------------------------|
+| `SEMANTIC_SCHOLAR_KEY` | Semantic Scholar API key                 |
+| `CROSSREF_EMAIL`       | Email for Crossref's polite pool         |
+
+## GitHub Actions Schedule
+
+The workflow runs every **Monday at 02:00 UTC** (`cron: "0 2 * * 1"`).
+To change the schedule, edit `.github/workflows/update-pubs.yml` and update
+the `cron` expression. You can also trigger the workflow manually via
+**Actions → Update Publications → Run workflow**.
+
+---
+
 # Academic Pages
 
 ![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
