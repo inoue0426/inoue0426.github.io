@@ -36,7 +36,11 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% assign display_year = post.year | default: post.date | default: "1900-01-01" | date: "%Y" %}
+    {% if post.year %}
+      {% assign display_year = post.year %}
+    {% else %}
+      {% assign display_year = post.date | default: "1900-01-01" | date: "%Y" %}
+    {% endif %}
     {% assign display_authors = post.authors | default: "" %}
     {% assign display_authors = display_authors | replace: "Yoshitaka Inoue", "<strong>Yoshitaka Inoue</strong>" %}
     {% assign paper_link = post.paperurl %}

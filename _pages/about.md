@@ -2,7 +2,7 @@
 permalink: /
 title: "About"
 author_profile: true
-redirect_from: 
+redirect_from:
   - /about/
   - /about.html
 ---
@@ -20,7 +20,11 @@ I hold an M.S. in Information Science from the Nara Institute of Science and Tec
 
 - Total publications: **{{ pub_count }}**
 {% if latest_pub %}
-- Latest publication year: **{{ latest_pub.year | default: latest_pub.date | date: "%Y" }}**
+  {% if latest_pub.year %}
+- Latest publication year: **{{ latest_pub.year }}**
+  {% else %}
+- Latest publication year: **{{ latest_pub.date | date: "%Y" }}**
+  {% endif %}
 {% endif %}
 
 ## Recent Publications
@@ -32,7 +36,11 @@ I hold an M.S. in Information Science from the Nara Institute of Science and Tec
     {% assign paper_link = post.url %}
   {% endif %}
   {% assign display_authors = post.authors | default: "" | replace: "Yoshitaka Inoue", "**Yoshitaka Inoue**" %}
-
-- {{ post.title }} ({{ post.year | default: post.date | date: "%Y" }})  
+  {% if post.year %}
+{{ post.title }} ({{ post.year }})
+  {% else %}
+{{ post.title }} ({{ post.date | date: "%Y" }})
+  {% endif %}
   {{ display_authors }}{% if paper_link %} · [Paper]({{ paper_link }}){% endif %}
+
 {% endfor %}

@@ -41,7 +41,11 @@
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.collection == 'publications' %}
-          {% assign display_year = post.year | default: post.date | default: "1900-01-01" | date: "%Y" %}
+          {% if post.year %}
+            {% assign display_year = post.year %}
+          {% else %}
+            {% assign display_year = post.date | default: "1900-01-01" | date: "%Y" %}
+          {% endif %}
           {% assign display_authors = post.authors | default: "" %}
           {% assign display_authors = display_authors | replace: "Yoshitaka Inoue", "<strong>Yoshitaka Inoue</strong>" %}
           <p>{{ display_authors }}{% if display_authors != "" %}. {% endif %}<i>{{ post.venue }}</i>{% if post.venue %}, {% endif %}{{ display_year }}</p>
