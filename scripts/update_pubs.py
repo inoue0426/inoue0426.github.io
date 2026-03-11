@@ -88,6 +88,75 @@ def _request_with_retry(url: str, params: dict, headers: Optional[dict] = None) 
                 return None
     return None
 
+# ---------------------------------------------------------------------------
+# Link resolution helper: best URL を決める
+# ---------------------------------------------------------------------------
+def _get_paper_details(paper_id: str, api_key: Optional[str]) -> dict:
+    """
+    /paper/{paperId}?fields=... で openAccessPdf, externalIds, url を取得する。
+    失敗したら空 dict を返す（呼び出し側でフォールバック処理）。
+    """
+    if not paper_id:
+        return {}
+    url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
+    headers = {"x-api-key": api_key} if api_key else {}
+    params = {"fields": "openAccessPdf,externalIds,url,externalIds"}
+    resp = _request_with_retry(url, params, headers)
+    if resp is None:
+        return {}
+    try:
+        return resp.json()
+    except Exception:
+        return {}
+
+def choose_best_link(paper_meta: dict, api_key: Optional[str] = None) -> str:
+    """
+    手持ちの meta (paperId, doi, url, etc.) を見て最適なリンクを返す。
+    - まず /paper/{paperId} を叩いて openAccessPdf を確認
+    - 次に externalIds (DOI, ArXiv) を確認
+    - 次に既にある paper_meta['url']
+    - 最後に semanticscholar の論文ページ
+    """
+    # 1) try detailed paper endpoint (openAccessPdf)
+    paper_id = paper_meta.get("paperId") or ""
+    details = _get_paper_details(paper_id, api_key) if paper_id else {}
+
+    # openAccessPdf があるか
+    oap = details.get("openAccessPdf") or {}
+    if isinstance(oap, dict):
+        pdf_url = oap.get("url") or oap.get("URL")
+        if pdf_url:
+            return pdf_url
+
+    # 2) externalIds -> DOI or ArXiv
+    ext = details.get("externalIds") or paper_meta.get("externalIds") or {}
+    if isinstance(ext, dict):
+        doi = (ext.get("DOI") or ext.get("doi") or "").strip()
+        if doi:
+            return f"https://doi.org/{doi}"
+        # arXiv may be in different keys, try common forms
+        arxiv = (ext.get("ArXiv") or ext.get("arXiv") or ext.get("ARXIV") or "").strip()
+        if arxiv:
+            # arXiv id may contain version suffix, keep it
+            return f"https://arxiv.org/abs/{arxiv}"
+
+    # 3) details.url or meta.url
+    details_url = details.get("url") or paper_meta.get("url") or ""
+    if details_url:
+        return details_url
+
+    # 4) if meta has doi field (fallback)
+    doi_meta = (paper_meta.get("doi") or "").strip()
+    if doi_meta:
+        return f"https://doi.org/{doi_meta}"
+
+    # 5) fallback: semantic scholar paper page (if we have paperId)
+    if paper_id:
+        return f"https://www.semanticscholar.org/paper/{paper_id}"
+
+    # 6) nothing found
+    return ""
+
 # --- 差し替え用: fetch_semantic_scholar_by_author （fields から abstract を外した最小実装）
 def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict]:
     """
@@ -163,6 +232,17 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
             "abstract": "",  # author/{id}?fields=papers.abstract を追加すれば得られるが容量に注意
             "paperId": item.get("paperId") or "",
         })
+
+# 既に papers を取得した直後に best-link を解決して埋める
+    for p in papers:
+        try:
+            best = choose_best_link(p, api_key)
+            if best:
+                p["url"] = best
+            # 軽いスリープを入れてレート負荷を分散
+            time.sleep(RATE_LIMIT_DELAY)
+        except Exception as e:
+            logger.warning("Failed to resolve link for paper '%s': %s", p.get("title"), e)
 
     logger.info("Parsed %d papers from author payload", len(papers))
     return papers
