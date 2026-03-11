@@ -22,6 +22,7 @@ import requests
 # ---------------------------------------------------------------------------
 AUTHOR_ID = "2301432341"
 OUTPUT_DIR = Path("_publications")
+ABOUT_PATH = Path("_pages/about.md")
 SEMANTIC_SCHOLAR_AUTHOR_PAPERS = f"https://api.semanticscholar.org/graph/v1/author/{AUTHOR_ID}/papers"
 RATE_LIMIT_DELAY = 0.1
 MAX_RETRIES = 3
@@ -30,6 +31,49 @@ PAGE_LIMIT = 100  # 一度に取る件数（100 が妥当）
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
 logger = logging.getLogger("update_pubs_fixed")
+
+ABOUT_TEMPLATE = """---
+permalink: /
+title: "About"
+author_profile: true
+redirect_from:
+    - /about/
+    - /about.html
+---
+
+I am Yoshitaka Inoue, a PhD candidate in Computer Science at the University of Minnesota under the supervision of [Dr. Rui Kuang](https://cse.umn.edu/cs/rui-kuang). I am also a pre-doctoral fellow at the National Library of Medicine and affiliated with the National Cancer Institute, advised by [Dr. Augustin Luna](https://www.nlm.nih.gov/research/researchstaff/LunaAugustin.html).
+
+I am interested in graph neural networks, drug discovery, single cell analysis, and biological networks. My future goal is to understand biological phenomena using computational approaches and to contribute to the development of therapeutics through my research.
+
+I hold an M.S. in Information Science from the Nara Institute of Science and Technology, where I was advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html). During my master's degree, I studied abroad at UC Davis under the supervision of [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
+
+## Publications Snapshot
+
+{% assign pub_count = site.publications | size %}
+{% assign latest_pub = site.publications | sort: "year" | last %}
+
+- Total publications: **{{ pub_count }}**
+{% if latest_pub %}
+    {% if latest_pub.year %}
+- Latest publication year: **{{ latest_pub.year }}**
+    {% else %}
+- Latest publication year: **{{ latest_pub.date | date: "%Y" }}**
+    {% endif %}
+{% endif %}
+
+## Recent Publications
+
+{% assign recent_pubs = site.publications | sort: "year" | reverse %}
+{% for post in recent_pubs limit:5 %}
+    {% assign paper_link = post.paperurl %}
+    {% if paper_link == nil and post.url and post.url contains '://' %}
+        {% assign paper_link = post.url %}
+    {% endif %}
+    {% assign display_authors = post.authors | default: "" | replace: "Yoshitaka Inoue", "**Yoshitaka Inoue**" %}
+- {% if post.year %}{{ post.title }} ({{ post.year }}){% else %}{{ post.title }} ({{ post.date | date: "%Y" }}){% endif %}
+    {{ display_authors }}{% if paper_link %} · [Paper]({{ paper_link }}){% endif %}
+{% endfor %}
+"""
 
 
 def load_env_file(env_path: Path = Path(".env")) -> None:
@@ -133,7 +177,7 @@ def _get_paper_details(paper_id: str, api_key: Optional[str]) -> dict:
         return {}
     url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
     headers = {"x-api-key": api_key} if api_key else {}
-    params = {"fields": "openAccessPdf,externalIds,url,citationCount"}
+    params = {"fields": "openAccessPdf,externalIds,url,externalIds"}
     resp = _request_with_retry(url, params, headers)
     if resp is None:
         return {}
@@ -207,7 +251,6 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
         "papers.year",
         "papers.venue",
         "papers.externalIds",
-        "papers.citationCount",
         "papers.url",
     ])
     params = {"fields": fields}
@@ -264,7 +307,6 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
             "doi": doi or "",
             "url": url or "",
             "abstract": "",  # author/{id}?fields=papers.abstract を追加すれば得られるが容量に注意
-            "citation_count": item.get("citationCount"),
             "paperId": item.get("paperId") or "",
         })
 
@@ -274,10 +316,6 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
             best = choose_best_link(p, api_key)
             if best:
                 p["url"] = best
-            if p.get("citation_count") is None and p.get("paperId"):
-                details = _get_paper_details(p.get("paperId"), api_key)
-                if isinstance(details, dict):
-                    p["citation_count"] = details.get("citationCount")
             # 軽いスリープを入れてレート負荷を分散
             time.sleep(RATE_LIMIT_DELAY)
         except Exception as e:
@@ -321,7 +359,6 @@ def build_markdown(meta: dict) -> str:
     venue = escape_yaml_str(meta.get("venue", ""))
     doi = meta.get("doi") or ""
     paperurl = meta.get("url") or meta.get("paperurl") or ""
-    citation_count = meta.get("citation_count")
     abstract = (meta.get("abstract") or "").strip()
 
     fm_lines = [
@@ -333,10 +370,8 @@ def build_markdown(meta: dict) -> str:
         f'doi: "{doi}"',
         f'paperurl: "{paperurl}"',
         "collection: publications",
+        "---",
     ]
-    if citation_count is not None:
-        fm_lines.append(f"citation_count: {citation_count}")
-    fm_lines.append("---")
     return "\n".join(fm_lines) + "\n\n" + abstract + "\n"
 
 def write_publication(meta: dict, output_dir: Path, existing: dict[str, Path]) -> str:
@@ -374,6 +409,20 @@ def write_publication(meta: dict, output_dir: Path, existing: dict[str, Path]) -
     logger.info("[%s] %s", action.upper(), target.name)
     return action
 
+def write_about_page(about_path: Path = ABOUT_PATH) -> str:
+    """Write _pages/about.md from template. Returns updated/skipped."""
+    try:
+        existing = about_path.read_text(encoding="utf-8") if about_path.exists() else ""
+        if existing == ABOUT_TEMPLATE:
+            logger.info("[SKIPPED] %s (no change)", about_path)
+            return "skipped"
+        about_path.write_text(ABOUT_TEMPLATE, encoding="utf-8")
+        logger.info("[UPDATED] %s", about_path)
+        return "updated"
+    except Exception as exc:
+        logger.warning("Failed to write about page: %s", exc)
+        return "error"
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -396,7 +445,8 @@ def main() -> None:
         else:
             logger.warning("Unknown result: %s", result)
 
-    logger.info("Summary -> Added: %d, Updated: %d, Skipped: %d", counts["added"], counts["updated"], counts["skipped"])
+    about_result = write_about_page()
+    logger.info("Summary -> Added: %d, Updated: %d, Skipped: %d, About: %s", counts["added"], counts["updated"], counts["skipped"], about_result)
 
 if __name__ == "__main__":
     main()
