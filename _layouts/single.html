@@ -46,7 +46,7 @@ layout: default
 
       <section class="page__content" itemprop="text">
         {% assign paper_link = page.paperurl %}
-        {% if page.collection == 'publications' and page.url %}
+        {% if page.collection == 'publications' and paper_link == nil and page.url and page.url contains '://' %}
           {% assign paper_link = page.url %}
         {% endif %}
 

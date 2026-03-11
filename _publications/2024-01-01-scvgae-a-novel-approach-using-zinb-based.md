@@ -4,8 +4,6 @@ authors: "Yoshitaka Inoue"
 year: 2024
 venue: "arXiv.org"
 doi: "10.48550/arXiv.2403.08959"
-url: "https://doi.org/10.48550/arXiv.2403.08959"
+paperurl: "https://doi.org/10.48550/arXiv.2403.08959"
 collection: publications
 ---
-
-

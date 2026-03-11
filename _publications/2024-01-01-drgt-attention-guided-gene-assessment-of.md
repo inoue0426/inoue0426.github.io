@@ -4,8 +4,6 @@ authors: "Yoshitaka Inoue, Hunmin Lee, Tianfan Fu, Augustin Luna"
 year: 2024
 venue: "arXiv.org"
 doi: "10.48550/arXiv.2405.08979"
-url: "https://doi.org/10.48550/arXiv.2405.08979"
+paperurl: "https://doi.org/10.48550/arXiv.2405.08979"
 collection: publications
 ---
-
-

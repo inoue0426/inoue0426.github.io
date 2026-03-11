@@ -53,7 +53,7 @@
     {% endif %}
 
     {% assign paper_link = post.paperurl %}
-    {% if post.collection == 'publications' and post.url %}
+    {% if post.collection == 'publications' and paper_link == nil and post.url and post.url contains '://' %}
       {% assign paper_link = post.url %}
     {% endif %}
 

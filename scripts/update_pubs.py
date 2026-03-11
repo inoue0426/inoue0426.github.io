@@ -314,7 +314,7 @@ def build_markdown(meta: dict) -> str:
     year = meta.get("year") or ""
     venue = escape_yaml_str(meta.get("venue", ""))
     doi = meta.get("doi") or ""
-    url = meta.get("url") or ""
+    paperurl = meta.get("url") or meta.get("paperurl") or ""
     abstract = (meta.get("abstract") or "").strip()
 
     fm_lines = [
@@ -324,7 +324,7 @@ def build_markdown(meta: dict) -> str:
         f"year: {year}",
         f'venue: "{venue}"',
         f'doi: "{doi}"',
-        f'url: "{url}"',
+        f'paperurl: "{paperurl}"',
         "collection: publications",
         "---",
     ]
