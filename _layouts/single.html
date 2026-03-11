@@ -33,24 +33,45 @@ layout: default
         {% if page.modified %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.modified | date: "%Y-%m-%d" }}">{{ page.modified | date: "%B %d, %Y" }}</time></p>
         {% endif %}
-        
+
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.venue and page.date %}
           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.date %}
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
-        {% endif %}    
+        {% endif %}
         </header>
       {% endunless %}
 
       <section class="page__content" itemprop="text">
-        {{ content }}
+        {% assign paper_link = page.paperurl %}
+        {% if page.collection == 'publications' and page.url %}
+          {% assign paper_link = page.url %}
+        {% endif %}
 
-        {% if page.citation and page.paperurl and page.slidesurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
-        {% elsif page.citation and page.paperurl %}
-          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.paperurl }}">Download Paper</a></p>
+        {% assign content_plain = content | strip_html | strip %}
+
+        {% if page.collection == 'publications' %}
+          {% if content_plain != "" %}
+            <h2>Abstract</h2>
+            {{ content }}
+          {% elsif page.abstract %}
+            <h2>Abstract</h2>
+            <p>{{ page.abstract }}</p>
+          {% endif %}
+
+          {% if paper_link %}
+            <p><a href="{{ paper_link }}" class="btn btn--small" target="_blank" rel="noopener noreferrer">View Paper</a></p>
+          {% endif %}
+        {% else %}
+          {{ content }}
+        {% endif %}
+
+        {% if page.citation and paper_link and page.slidesurl %}
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ paper_link }}">Download Paper</a> | <a href="{{ page.slidesurl }}">Download Slides</a></p>
+        {% elsif page.citation and paper_link %}
+          <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ paper_link }}">Download Paper</a></p>
         {% elsif page.citation and page.slidesurl %}
           <p style="font-size: smaller">Recommended citation: {{ page.citation }}<br /><a href="{{ page.slidesurl }}">Download Slides</a></p>
         {% elsif page.citation %}
