@@ -40,16 +40,32 @@ def slugify(text: str, max_len: int = 40) -> str:
     text = re.sub(r"[\s-]+", "-", text).strip("-")
     return text[:max_len].strip("-") or "untitled"
 
-def make_filename(meta: dict, output_dir: Path) -> Path:
-    year = meta.get("year") or datetime.now(timezone.utc).year
-    date_str = f"{year}-01-01"
+def title_hash(title: str) -> str:
+    """Return an 8-character hex hash of the given title string."""
+    return hashlib.sha1(title.encode("utf-8")).hexdigest()[:8]
+
+def make_filename(meta: dict) -> str:
+    """Return a filename string (not a Path) for the given paper metadata.
+
+    Uses ``meta["date"]`` if present, otherwise falls back to ``meta["year"]``
+    to build a ``YYYY-MM-DD-<slug>.md`` filename.
+    """
+    date_str = meta.get("date") or ""
+    if not date_str:
+        year = meta.get("year") or datetime.now(timezone.utc).year
+        date_str = f"{year}-01-01"
     slug = slugify(meta.get("title", "untitled"))
-    base = f"{date_str}-{slug}.md"
+    return f"{date_str}-{slug}.md"
+
+def _resolve_filepath(meta: dict, output_dir: Path) -> Path:
+    """Resolve the full output Path for a paper, avoiding collisions."""
+    base = make_filename(meta)
     target = output_dir / base
     # 衝突回避：既に存在するなら短ハッシュを付与
     if target.exists():
-        h = hashlib.sha1((meta.get("title", "") + str(meta.get("doi", ""))).encode("utf-8")).hexdigest()[:8]
-        target = output_dir / f"{date_str}-{slug}-{h}.md"
+        h = title_hash(meta.get("title", "") + str(meta.get("doi", "")))
+        stem = base.removesuffix(".md")
+        target = output_dir / f"{stem}-{h}.md"
     return target
 
 def escape_yaml_str(value: Optional[str]) -> str:
@@ -315,7 +331,7 @@ def write_publication(meta: dict, output_dir: Path, existing: dict[str, Path]) -
         target = existing[title_slug]
         action = "updated"
     else:
-        target = make_filename(meta, output_dir)
+        target = _resolve_filepath(meta, output_dir)
         action = "added"
 
     content = build_markdown(meta)
