@@ -31,6 +31,23 @@ PAGE_LIMIT = 100  # 一度に取る件数（100 が妥当）
 logging.basicConfig(level=logging.INFO, format="%(levelname)s:%(name)s:%(message)s")
 logger = logging.getLogger("update_pubs_fixed")
 
+
+def load_env_file(env_path: Path = Path(".env")) -> None:
+    if not env_path.exists():
+        return
+    try:
+        for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key = key.strip()
+            value = value.strip().strip('"').strip("'")
+            if key and key not in os.environ:
+                os.environ[key] = value
+    except Exception as exc:
+        logger.warning("Failed to load .env file: %s", exc)
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -352,7 +369,8 @@ def write_publication(meta: dict, output_dir: Path, existing: dict[str, Path]) -
 # Main
 # ---------------------------------------------------------------------------
 def main() -> None:
-    api_key = os.environ.get("SEMANTIC_SCHOLAR_KEY")
+    load_env_file()
+    api_key = os.environ.get("SEMANTIC_SCHOLAR_API_KEY") or os.environ.get("SEMANTIC_SCHOLAR_KEY")
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     existing = load_existing_dois(OUTPUT_DIR)
 
