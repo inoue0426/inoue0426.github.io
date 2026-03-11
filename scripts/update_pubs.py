@@ -133,7 +133,7 @@ def _get_paper_details(paper_id: str, api_key: Optional[str]) -> dict:
         return {}
     url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}"
     headers = {"x-api-key": api_key} if api_key else {}
-    params = {"fields": "openAccessPdf,externalIds,url,externalIds"}
+    params = {"fields": "openAccessPdf,externalIds,url,citationCount"}
     resp = _request_with_retry(url, params, headers)
     if resp is None:
         return {}
@@ -207,6 +207,7 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
         "papers.year",
         "papers.venue",
         "papers.externalIds",
+        "papers.citationCount",
         "papers.url",
     ])
     params = {"fields": fields}
@@ -263,6 +264,7 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
             "doi": doi or "",
             "url": url or "",
             "abstract": "",  # author/{id}?fields=papers.abstract を追加すれば得られるが容量に注意
+            "citation_count": item.get("citationCount"),
             "paperId": item.get("paperId") or "",
         })
 
@@ -272,6 +274,10 @@ def fetch_semantic_scholar_by_author(api_key: Optional[str] = None) -> list[dict
             best = choose_best_link(p, api_key)
             if best:
                 p["url"] = best
+            if p.get("citation_count") is None and p.get("paperId"):
+                details = _get_paper_details(p.get("paperId"), api_key)
+                if isinstance(details, dict):
+                    p["citation_count"] = details.get("citationCount")
             # 軽いスリープを入れてレート負荷を分散
             time.sleep(RATE_LIMIT_DELAY)
         except Exception as e:
@@ -315,6 +321,7 @@ def build_markdown(meta: dict) -> str:
     venue = escape_yaml_str(meta.get("venue", ""))
     doi = meta.get("doi") or ""
     paperurl = meta.get("url") or meta.get("paperurl") or ""
+    citation_count = meta.get("citation_count")
     abstract = (meta.get("abstract") or "").strip()
 
     fm_lines = [
@@ -326,8 +333,10 @@ def build_markdown(meta: dict) -> str:
         f'doi: "{doi}"',
         f'paperurl: "{paperurl}"',
         "collection: publications",
-        "---",
     ]
+    if citation_count is not None:
+        fm_lines.append(f"citation_count: {citation_count}")
+    fm_lines.append("---")
     return "\n".join(fm_lines) + "\n\n" + abstract + "\n"
 
 def write_publication(meta: dict, output_dir: Path, existing: dict[str, Path]) -> str:

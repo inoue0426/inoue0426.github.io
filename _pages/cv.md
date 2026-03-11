@@ -58,19 +58,23 @@ Skills
 
 Publications
 ======
+{% assign pub_count = site.publications | size %}
+{% assign years = site.publications | map: "year" | uniq | sort | reverse %}
+* Auto-updated publication count: **{{ pub_count }}**
+* Covered years: **{{ years | join: ", " }}**
+
   <ul>{% for post in site.publications reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
-  
+
 Talks
 ======
   <ul>{% for post in site.talks reversed %}
     {% include archive-single-talk-cv.html  %}
   {% endfor %}</ul>
-  
+
 Teaching
 ======
   <ul>{% for post in site.teaching reversed %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
-

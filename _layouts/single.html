@@ -36,6 +36,11 @@ layout: default
 
         {% if page.collection == 'teaching' %}
           <p> {{ page.type }}, <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
+        {% elsif page.collection == 'publications' %}
+          {% assign display_year = page.year | default: page.date | default: "1900-01-01" | date: "%Y" %}
+          {% assign display_authors = page.authors | default: "" %}
+          {% assign display_authors = display_authors | replace: "Yoshitaka Inoue", "<strong>Yoshitaka Inoue</strong>" %}
+          <p>{{ display_authors }}{% if display_authors != "" %}. {% endif %}<i>{{ page.venue }}</i>{% if page.venue %}, {% endif %}{{ display_year }}</p>
         {% elsif page.venue and page.date %}
           <p>Published in <i>{{ page.venue }}</i>, {{ page.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif page.date %}
