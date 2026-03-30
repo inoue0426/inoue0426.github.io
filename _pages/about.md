@@ -13,6 +13,11 @@ I am interested in graph neural networks, drug discovery, single cell analysis, 
 
 I hold an M.S. in Information Science from the Nara Institute of Science and Technology, where I was advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html).  During my master's degree, I studied abroad at UC Davis under the supervision of [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
 
+## Other Pages
+
+- [Awesome Computational Biology](https://inoue0426.github.io/awesome-computational-biology/) — A curated list of computational biology resources.
+- [Paper Reading](https://inoue0426.github.io/Paper-reading/) — Notes and summaries from paper reading sessions.
+
 ## Publications Snapshot
 
 {% assign pub_count = site.publications | size %}
