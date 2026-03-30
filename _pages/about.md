@@ -27,6 +27,11 @@ I develop open-source tools for computational biology and drug discovery. See th
 - **[{{ lib.name }}]({{ lib.github }})** — {{ lib.description }}
 {% endfor %}
 
+## Other Pages
+
+- [Awesome Computational Biology](https://inoue0426.github.io/awesome-computational-biology/) — A curated list of computational biology resources.
+- [Paper Reading](https://inoue0426.github.io/Paper-reading/) — Notes and summaries from paper reading sessions.
+
 ## Publications Snapshot
 
 {% assign pub_count = site.publications | size %}
