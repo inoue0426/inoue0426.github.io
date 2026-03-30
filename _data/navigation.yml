@@ -14,3 +14,9 @@ main:
     
   # - title: "Guide"
   #   url: /markdown/
+
+  - title: "Awesome Compbio"
+    url: https://inoue0426.github.io/awesome-computational-biology/
+
+  - title: "Paper Reading"
+    url: https://inoue0426.github.io/Paper-reading/
