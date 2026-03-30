@@ -13,6 +13,20 @@ I am interested in graph neural networks, drug discovery, single cell analysis, 
 
 I hold an M.S. in Information Science from the Nara Institute of Science and Technology, where I was advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html).  During my master's degree, I studied abroad at UC Davis under the supervision of [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
 
+## My Libraries
+
+I develop open-source tools for computational biology and drug discovery. See the full list on the [Libraries](/libraries/) page.
+
+**Research Models:**
+{% for lib in site.data.libraries.research %}
+- **[{{ lib.name }}]({{ lib.github }})** — {{ lib.description }}{% if lib.paper %} · [Paper]({{ lib.paper }}){% endif %}
+{% endfor %}
+
+**Utility Libraries:**
+{% for lib in site.data.libraries.utilities %}
+- **[{{ lib.name }}]({{ lib.github }})** — {{ lib.description }}
+{% endfor %}
+
 ## Other Pages
 
 - [Awesome Computational Biology](https://inoue0426.github.io/awesome-computational-biology/) — A curated list of computational biology resources.
