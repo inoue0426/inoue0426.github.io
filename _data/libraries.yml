@@ -1,0 +1,56 @@
+# Libraries and tools created by Yoshitaka Inoue
+
+research:
+  - name: "scVGAE"
+    description: "ZINB-Based Variational Graph Autoencoder for Single-Cell RNA-Seq Imputation"
+    github: "https://github.com/inoue0426/scVGAE"
+    paper: "https://arxiv.org/abs/2403.08959"
+    language: "Python"
+    topics: "Single-cell RNA-seq, Graph Neural Networks, Imputation"
+
+  - name: "scBiGCN"
+    description: "Bi-Graph Convolutional Networks for Single-cell Transcriptome Imputation"
+    github: "https://github.com/inoue0426/scBiGCN"
+    paper: "https://doi.org/10.1101/2024.04.05.588342"
+    language: "Python"
+    topics: "Single-cell RNA-seq, Graph Convolutional Networks, Imputation"
+
+  - name: "drGT"
+    description: "Attention-Guided Gene Assessment of Drug Response in a Drug-Cell-Gene Heterogeneous Network"
+    github: "https://github.com/inoue0426/drGT"
+    paper: "https://arxiv.org/abs/2405.08979"
+    language: "Python"
+    topics: "Drug Response Prediction, Graph Neural Networks, Attention Mechanism"
+
+  - name: "GraphPINE"
+    description: "Graph Importance Propagation for Interpretable Drug Response Prediction"
+    github: "https://github.com/inoue0426/GraphPINE"
+    paper: "https://arxiv.org/abs/2504.05454"
+    language: "Python"
+    topics: "Drug Response Prediction, Interpretability, GNN"
+
+  - name: "DrugAgent"
+    description: "Multi-Agent LLM-Based Reasoning for Drug-Target Interaction Prediction"
+    github: "https://github.com/inoue0426/DrugAgent-v1"
+    paper: "https://arxiv.org/abs/2408.13378"
+    language: "Python"
+    topics: "Drug-Target Interaction, Large Language Models, Multi-Agent"
+
+utilities:
+  - name: "smiles2graph"
+    description: "Convert SMILES strings to PyTorch Geometric graph objects"
+    github: "https://github.com/inoue0426/smiles2graph"
+    language: "Python"
+    topics: "Cheminformatics, PyTorch Geometric, Drug Discovery"
+
+  - name: "PubChemExchanger"
+    description: "Retrieve and exchange chemical identifiers (SMILES, CID, SID, NSC, etc.) from PubChem"
+    github: "https://github.com/inoue0426/PubChemExchanger"
+    language: "Python"
+    topics: "Cheminformatics, PubChem, Drug Discovery"
+
+  - name: "DrugBankParser"
+    description: "Parse DrugBank XML files to extract drug names, CID, SMILES, targets, and UniProt IDs"
+    github: "https://github.com/inoue0426/DrugBankParser"
+    language: "Python"
+    topics: "DrugBank, Cheminformatics, Data Extraction"
