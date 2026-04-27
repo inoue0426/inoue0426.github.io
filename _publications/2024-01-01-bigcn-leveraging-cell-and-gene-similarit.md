@@ -1,6 +1,6 @@
 ---
 title: "BiGCN: Leveraging Cell and Gene Similarities for Single-cell Transcriptome Imputation with Bi-Graph Convolutional Networks"
-authors: "Yoshitaka Inoue, Ethan Kulman, Rui Kuang"
+authors: "Yoshitaka Inoue, Ethan Kulman, R. Kuang"
 year: 2024
 venue: "bioRxiv"
 doi: "10.1101/2024.04.05.588342"
