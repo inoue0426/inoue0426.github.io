@@ -97,7 +97,8 @@ $(document).ready(function(){
   });
 
   // back to top button
-  var $backToTop = $('<button type="button" class="btn btn--primary" aria-label="Back to top">↑ Top</button>');
+  var SCROLL_TO_TOP_DURATION = 400;
+  var $backToTop = $('<button type="button" class="btn btn--primary" aria-label="Back to top" tabindex="0">↑ Top</button>');
   $backToTop.css({
     position: "fixed",
     right: "1rem",
@@ -117,7 +118,7 @@ $(document).ready(function(){
   });
 
   var scrollToTop = function() {
-    $("html, body").animate({ scrollTop: 0 }, 400);
+    $("html, body").animate({ scrollTop: 0 }, SCROLL_TO_TOP_DURATION);
   };
 
   $backToTop.on("click", scrollToTop);
