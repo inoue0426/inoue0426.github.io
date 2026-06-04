@@ -96,4 +96,37 @@ $(document).ready(function(){
     midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
   });
 
+  // back to top button
+  var scrollToTopDuration = 400;
+  var $backToTop = $('<button type="button" class="btn btn--primary" aria-label="Back to top">↑ Top</button>');
+  $backToTop.css({
+    position: "fixed",
+    right: "1rem",
+    bottom: "1rem",
+    zIndex: 1000,
+    display: "none"
+  });
+
+  $("body").append($backToTop);
+
+  var scrollToTop = function() {
+    $("html, body").animate({ scrollTop: 0 }, scrollToTopDuration);
+  };
+
+  $(window).on("scroll", function() {
+    if ($(this).scrollTop() > 300) {
+      $backToTop.fadeIn("fast");
+    } else {
+      $backToTop.fadeOut("fast");
+    }
+  });
+
+  $backToTop.on("click", scrollToTop);
+  $backToTop.on("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      scrollToTop();
+    }
+  });
+
 });
