@@ -116,8 +116,16 @@ $(document).ready(function(){
     }
   });
 
-  $backToTop.on("click", function() {
+  var scrollToTop = function() {
     $("html, body").animate({ scrollTop: 0 }, 400);
+  };
+
+  $backToTop.on("click", scrollToTop);
+  $backToTop.on("keydown", function(event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      scrollToTop();
+    }
   });
 
 });
