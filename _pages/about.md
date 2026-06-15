@@ -7,11 +7,19 @@ redirect_from:
   - /about.html
 ---
 
-I am Yoshitaka Inoue, a PhD candidate in Computer Science at the University of Minnesota advised by [Dr. Rui Kuang](https://cse.umn.edu/cs/rui-kuang). I am also a pre-doctoral fellow at the National Library of Medicine and affiliated with the National Cancer Institute, advised by [Dr. Augustin Luna](https://www.nlm.nih.gov/research/researchstaff/LunaAugustin.html).
+I am a Ph.D. candidate in Computer Science at the University of Minnesota and a pre-doctoral fellow at the National Library of Medicine / National Cancer Institute.
 
-My research focuses on graph neural networks for drug discovery, single-cell analysis, and biological network modeling. I aim to develop computational methods that advance translational research and therapeutic development.
+My research develops machine learning methods for molecular medicine, focusing on drug response prediction, graph representation learning, perturbation modeling, and LLM-based biomedical reasoning for precision oncology.
 
-I hold an M.S. in Information Science from the Nara Institute of Science and Technology, advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html). During my master's, I studied abroad at UC Davis under [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
+Previously, I received my M.S. in Information Science from the Nara Institute of Science and Technology and was a visiting scholar at UC Davis.
+
+## Research Interests
+
+- Machine learning for molecular medicine
+- Drug response prediction and treatment response modeling
+- Graph representation learning for biological and pharmacological data
+- Single-cell, perturbation, and intervention-aware representation learning
+- LLM-based biomedical reasoning and evidence integration
 
 ## Selected Publications
 
