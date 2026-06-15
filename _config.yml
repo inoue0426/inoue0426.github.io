@@ -35,7 +35,7 @@ author:
   googlescholar    : "https://scholar.google.com/citations?user=aBizyLkAAAAJ&hl=ja&oi=sra"
   impactstory      : # URL
   orcid            : "https://orcid.org/my-orcid?orcid=0000-0003-4432-8166"
-  semantic         : "https://www.semanticscholar.org/author/Yoshitaka-Inoue/2301432341"
+  semantic         : # URL
   pubmed           : # URL
   researchgate     : # URL
 
@@ -65,7 +65,7 @@ author:
   steam            : # Username
   telegram         : # URL
   tumblr           : # Username
-  twitter          : inoue_0426
+  twitter          : # Username
   vine             : # Username
   weibo            : # Username
   wikipedia        : # Username
