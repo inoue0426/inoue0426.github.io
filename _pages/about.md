@@ -16,17 +16,23 @@ I hold an M.S. in Information Science from the Nara Institute of Science and Tec
 ## Selected Publications
 
 {% assign recent_pubs = site.publications | sort: "year" | reverse %}
-{% for post in recent_pubs limit:5 %}
+{% assign shown_count = 0 %}
+{% for post in recent_pubs %}
+  {% assign author_list = post.authors | default: "" | split: ", " %}
+  {% if author_list[0] == "Yoshitaka Inoue" and shown_count < 5 %}
   {% assign paper_link = post.paperurl %}
   {% if paper_link == nil and post.url and post.url contains '://' %}
     {% assign paper_link = post.url %}
   {% endif %}
   {% assign display_authors = post.authors | default: "" | replace: "Yoshitaka Inoue", "**Yoshitaka Inoue**" %}
   {% if post.year %}
-{{ post.title }} ({{ post.year }})
+{% assign display_year = post.year %}
   {% else %}
-{{ post.title }} ({{ post.date | date: "%Y" }})
+{% assign display_year = post.date | date: "%Y" %}
   {% endif %}
-  {{ display_authors }}{% if paper_link %} · [Paper]({{ paper_link }}){% endif %}
+- {{ post.title }} ({{ display_year }}){% if paper_link %} · [Paper]({{ paper_link }}){% endif %}<br>
+  {{ display_authors }}
+  {% assign shown_count = shown_count | plus: 1 %}
+  {% endif %}
 
 {% endfor %}
