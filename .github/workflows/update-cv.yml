@@ -1,9 +1,7 @@
 name: Update CV from Google Docs
 
-# Run every Monday at 03:00 UTC, or trigger manually.
+# Trigger manually only.
 on:
-  schedule:
-    - cron: "0 3 * * 1"
   workflow_dispatch:
 
 permissions:

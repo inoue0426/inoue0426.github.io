@@ -1,9 +1,7 @@
 name: Update Publications
 
-# Run every Monday at 02:00 UTC, or trigger manually.
+# Trigger manually only.
 on:
-  schedule:
-    - cron: "0 2 * * 1"
   workflow_dispatch:
 
 permissions:

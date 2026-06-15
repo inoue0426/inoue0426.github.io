@@ -7,46 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-I am Yoshitaka Inoue, a PhD candidate in Computer Science at the University of Minnesota under the supervision of [Dr. Rui Kuang](https://cse.umn.edu/cs/rui-kuang). I am also a pre-doctoral fellow at the National Library of Medicine and affiliated with the National Cancer Institute, advised by [Dr. Augustin Luna](https://www.nlm.nih.gov/research/researchstaff/LunaAugustin.html).
+I am Yoshitaka Inoue, a PhD candidate in Computer Science at the University of Minnesota advised by [Dr. Rui Kuang](https://cse.umn.edu/cs/rui-kuang). I am also a pre-doctoral fellow at the National Library of Medicine and affiliated with the National Cancer Institute, advised by [Dr. Augustin Luna](https://www.nlm.nih.gov/research/researchstaff/LunaAugustin.html).
 
-I am interested in graph neural networks, drug discovery, single cell analysis, and biological networks. My future goal is to understand biological phenomena using computational approaches and to contribute to the development of therapeutics through my research.
+My research focuses on graph neural networks for drug discovery, single-cell analysis, and biological network modeling. I aim to develop computational methods that advance translational research and therapeutic development.
 
-I hold an M.S. in Information Science from the Nara Institute of Science and Technology, where I was advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html).  During my master's degree, I studied abroad at UC Davis under the supervision of [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
+I hold an M.S. in Information Science from the Nara Institute of Science and Technology, advised by [Dr. Shigehiko Kanaya](https://isw3.naist.jp/Research/ai-csb-en.html). During my master's, I studied abroad at UC Davis under [Dr. Oliver Fiehn](https://fiehnlab.ucdavis.edu/staff/fiehn).
 
-## My Libraries
-
-I develop open-source tools for computational biology and drug discovery. See the full list on the [Libraries](/libraries/) page.
-
-**Research Models:**
-{% for lib in site.data.libraries.research %}
-- **[{{ lib.name }}]({{ lib.github }})** — {{ lib.description }}{% if lib.paper %} · [Paper]({{ lib.paper }}){% endif %}
-{% endfor %}
-
-**Utility Libraries:**
-{% for lib in site.data.libraries.utilities %}
-- **[{{ lib.name }}]({{ lib.github }})** — {{ lib.description }}
-{% endfor %}
-
-## Other Pages
-
-- [Awesome Computational Biology](https://inoue0426.github.io/awesome-computational-biology/) — A curated list of computational biology resources.
-- [Paper Reading](https://inoue0426.github.io/Paper-reading/) — Notes and summaries from paper reading sessions.
-
-## Publications Snapshot
-
-{% assign pub_count = site.publications | size %}
-{% assign latest_pub = site.publications | sort: "year" | last %}
-
-- Total publications: **{{ pub_count }}**
-{% if latest_pub %}
-  {% if latest_pub.year %}
-- Latest publication year: **{{ latest_pub.year }}**
-  {% else %}
-- Latest publication year: **{{ latest_pub.date | date: "%Y" }}**
-  {% endif %}
-{% endif %}
-
-## Recent Publications
+## Selected Publications
 
 {% assign recent_pubs = site.publications | sort: "year" | reverse %}
 {% for post in recent_pubs limit:5 %}
