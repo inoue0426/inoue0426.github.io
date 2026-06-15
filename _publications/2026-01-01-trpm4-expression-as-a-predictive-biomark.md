@@ -1,5 +1,5 @@
 ---
-title: "TRPM4 Expression as a Predictive Biomarker and a Mechanistic Driver of Acetalax Activity in Prostate Cancer: Preclinical Efficacy Studies"
+title: "TRPM4 Expression as a Predictive Biomarker and a Mechanistic Driver of Acetalax Activity in Prostate Cancer: Preclinical Efficacy Studies."
 authors: "Yuka Hoshi-Kadonosawa, William C. Reinhold, Daiki Taniyama, Yoshitaka Inoue, Augustin Luna, Suresh Kumar, Nai-Yun Sun, Y. Kim, J. Yin, Nitin Roper, A. Sowalsky, W. Figg, N. Takebe, Y. Pommier"
 year: 2026
 venue: "Molecular Cancer Therapeutics"
