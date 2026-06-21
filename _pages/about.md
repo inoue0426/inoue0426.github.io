@@ -33,18 +33,18 @@ Previously, I received my M.Eng. in Information Science from the Nara Institute 
 
 ## Selected Publications
 
-- **DrugAgent: Reliable Multi-Agent Aggregation under Conflicting Biomedical Evidence**
-  **Yoshitaka Inoue**, Tianci Song, Xinlin Wang, Augustin Luna, Tianfan Fu
+- **DrugAgent: Reliable Multi-Agent Aggregation under Conflicting Biomedical Evidence**<br>
+  **Yoshitaka Inoue**, Tianci Song, Xinlin Wang, Augustin Luna, Tianfan Fu<br>
   *Scientific Reports*, under revision, 2026 · ICML 2026 Workshop on FM4LS · [paper](https://arxiv.org/abs/2408.13378)
 
-- **drGT: Attention-Guided Gene Assessment of Drug Response Utilizing a Drug-Cell-Gene Heterogeneous Network**
-  **Yoshitaka Inoue**, Hunmin Lee, Tianfan Fu, Rui Kuang, Augustin Luna
+- **drGT: Attention-Guided Gene Assessment of Drug Response Utilizing a Drug-Cell-Gene Heterogeneous Network**<br>
+  **Yoshitaka Inoue**, Hunmin Lee, Tianfan Fu, Rui Kuang, Augustin Luna<br>
   *BMC Bioinformatics*, 2026 · [paper](https://link.springer.com/article/10.1186/s12859-026-06417-z)
 
-- **Drug Discovery in the Era of Artificial Intelligence: From Target Identification to Clinical Trials**
-  **Yoshitaka Inoue**, Ning Hao, Yuting Lu, Tianfan Fu, Augustin Luna
+- **Drug Discovery in the Era of Artificial Intelligence: From Target Identification to Clinical Trials**<br>
+  **Yoshitaka Inoue**, Ning Hao, Yuting Lu, Tianfan Fu, Augustin Luna<br>
   *Health Data Science*, under revision, 2026 · [paper](https://www.preprints.org/manuscript/202606.0091)
 
-- **GraphPINE: Graph Importance Propagation for Interpretable Drug Response Prediction**
-  **Yoshitaka Inoue**, Tianfan Fu, Augustin Luna
+- **GraphPINE: Graph Importance Propagation for Interpretable Drug Response Prediction**<br>
+  **Yoshitaka Inoue**, Tianfan Fu, Augustin Luna<br>
   ICLR 2025 Workshop on MLGenX · [paper](https://arxiv.org/abs/2504.05454)
