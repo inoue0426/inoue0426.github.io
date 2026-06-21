@@ -17,8 +17,8 @@ Previously, I received my M.Eng. in Information Science from the Nara Institute 
 
 ## Recent News
 
-- **Jul 2026**: Two papers, **DrugAgent** and **drGT**, were accepted for oral presentations at ISMB 2026.
-- **Jul 2026**: **DrugAgent** was accepted to the ICML 2026 Workshop on FM4LS.
+- **Jun 2026**: Two papers, **DrugAgent** and **drGT**, were accepted for oral presentations at ISMB 2026.
+- **Jun 2026**: **DrugAgent** was accepted to the ICML 2026 Workshop on FM4LS.
 - **Jun 2026**: **Drug Discovery in the Era of Artificial Intelligence: From Target Identification to Clinical Trials** was posted as a preprint.
 - **May 2026**: **drGT** was selected as one of four Outstanding Postgraduate Fellow Finalists at the 26th Annual CCR-FYI Colloquium.
 - **Feb 2026**: **drGT** was accepted by *BMC Bioinformatics*.
