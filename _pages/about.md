@@ -7,11 +7,21 @@ redirect_from:
   - /about.html
 ---
 
-I am a Ph.D. candidate in Computer Science at the University of Minnesota and a pre-doctoral fellow at the National Library of Medicine / National Cancer Institute.
+I am Yoshitaka Inoue, a Ph.D. candidate in Computer Science at the University of Minnesota, advised by Prof. Rui Kuang, and a pre-doctoral fellow at the National Library of Medicine / National Cancer Institute, co-advised by Dr. Augustin Luna.
 
-My research develops machine learning methods for molecular medicine, focusing on drug response prediction, graph representation learning, perturbation modeling, and LLM-based biomedical reasoning for precision oncology.
+My research develops machine learning methods for molecular medicine, with a focus on drug response prediction, graph representation learning, perturbation modeling, and LLM-based biomedical reasoning for precision oncology.
 
-Previously, I received my M.S. in Information Science from the Nara Institute of Science and Technology and was a visiting scholar at UC Davis.
+I am currently seeking 2027 research internship opportunities and postdoctoral opportunities starting in September 2027.
+
+Previously, I received my M.Eng. in Information Science from the Nara Institute of Science and Technology and was a visiting scholar at the UC Davis Genome Center and DataLab.
+
+## Recent News
+
+- **Jul 2026**: Two papers, **DrugAgent** and **drGT**, were accepted for oral presentations at ISMB 2026.
+- **Jul 2026**: **DrugAgent** was accepted to the ICML 2026 Workshop on FM4LS.
+- **Jun 2026**: **Drug Discovery in the Era of Artificial Intelligence: From Target Identification to Clinical Trials** was posted as a preprint.
+- **May 2026**: **drGT** was selected as one of four Outstanding Postgraduate Fellow Finalists at the 26th Annual CCR-FYI Colloquium.
+- **Feb 2026**: **drGT** was accepted by *BMC Bioinformatics*.
 
 ## Research Interests
 
@@ -23,24 +33,18 @@ Previously, I received my M.S. in Information Science from the Nara Institute of
 
 ## Selected Publications
 
-{% assign recent_pubs = site.publications | sort: "year" | reverse %}
-{% assign shown_count = 0 %}
-{% for post in recent_pubs %}
-  {% assign author_list = post.authors | default: "" | split: ", " %}
-  {% if author_list[0] == "Yoshitaka Inoue" and shown_count < 5 %}
-  {% assign paper_link = post.paperurl %}
-  {% if paper_link == nil and post.url and post.url contains '://' %}
-    {% assign paper_link = post.url %}
-  {% endif %}
-  {% assign display_authors = post.authors | default: "" | replace: "Yoshitaka Inoue", "**Yoshitaka Inoue**" %}
-  {% if post.year %}
-{% assign display_year = post.year %}
-  {% else %}
-{% assign display_year = post.date | date: "%Y" %}
-  {% endif %}
-- {{ post.title }} ({{ display_year }}){% if paper_link %} · [Paper]({{ paper_link }}){% endif %}<br>
-  {{ display_authors }}
-  {% assign shown_count = shown_count | plus: 1 %}
-  {% endif %}
+- **DrugAgent: Reliable Multi-Agent Aggregation under Conflicting Biomedical Evidence**
+  **Yoshitaka Inoue**, Tianci Song, Xinlin Wang, Augustin Luna, Tianfan Fu
+  *Scientific Reports*, under revision, 2026 · ICML 2026 Workshop on FM4LS · [paper](https://arxiv.org/abs/2408.13378)
 
-{% endfor %}
+- **drGT: Attention-Guided Gene Assessment of Drug Response Utilizing a Drug-Cell-Gene Heterogeneous Network**
+  **Yoshitaka Inoue**, Hunmin Lee, Tianfan Fu, Rui Kuang, Augustin Luna
+  *BMC Bioinformatics*, 2026 · [paper](https://link.springer.com/article/10.1186/s12859-026-06417-z)
+
+- **Drug Discovery in the Era of Artificial Intelligence: From Target Identification to Clinical Trials**
+  **Yoshitaka Inoue**, Ning Hao, Yuting Lu, Tianfan Fu, Augustin Luna
+  *Health Data Science*, under revision, 2026 · [paper](https://www.preprints.org/manuscript/202606.0091)
+
+- **GraphPINE: Graph Importance Propagation for Interpretable Drug Response Prediction**
+  **Yoshitaka Inoue**, Tianfan Fu, Augustin Luna
+  ICLR 2025 Workshop on MLGenX · [paper](https://arxiv.org/abs/2504.05454)
