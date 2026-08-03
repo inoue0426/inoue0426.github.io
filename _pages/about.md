@@ -1,19 +1,31 @@
 ---
 permalink: /
-title: "About"
+title: "Yoshitaka Inoue | AI for Drug Discovery and Biomedical AI"
+excerpt: "Yoshitaka Inoue is a machine learning researcher at the University of Minnesota and NIH working on AI for drug discovery, precision oncology, drug response prediction, graph learning, and biomedical reasoning."
 author_profile: true
 redirect_from:
   - /about/
   - /about.html
 ---
 
-I am Yoshitaka Inoue, a Ph.D. candidate in Computer Science at the University of Minnesota, advised by Prof. Rui Kuang, and a pre-doctoral fellow at the National Library of Medicine / National Cancer Institute, co-advised by Dr. Augustin Luna.
+# Yoshitaka Inoue
 
-My research develops machine learning methods for molecular medicine, with a focus on drug response prediction, graph representation learning, perturbation modeling, and LLM-based biomedical reasoning for precision oncology.
+**Machine Learning Researcher in AI for Drug Discovery and Precision Oncology**
+
+I am **Yoshitaka Inoue**, a Ph.D. candidate in Computer Science at the **University of Minnesota**, advised by Prof. Rui Kuang, and a pre-doctoral fellow at the **National Library of Medicine / National Cancer Institute (NIH)**, co-advised by Dr. Augustin Luna.
+
+My research develops machine learning methods for molecular medicine, with a focus on **AI for drug discovery**, **drug response prediction**, **graph representation learning**, **perturbation modeling**, and **LLM-based biomedical reasoning** for precision oncology.
 
 I am currently seeking 2027 research internship opportunities and postdoctoral opportunities starting in September 2027.
 
 Previously, I received my M.Eng. in Information Science from the Nara Institute of Science and Technology and was a visiting scholar at the UC Davis Genome Center and DataLab.
+
+## Researcher Profiles
+
+- [Google Scholar](https://scholar.google.com/citations?user=aBizyLkAAAAJ)
+- [ORCID: 0000-0003-4432-8166](https://orcid.org/0000-0003-4432-8166)
+- [GitHub](https://github.com/inoue0426)
+- [LinkedIn](https://www.linkedin.com/in/inoue0426/)
 
 ## Recent News
 
@@ -25,11 +37,12 @@ Previously, I received my M.Eng. in Information Science from the Nara Institute 
 
 ## Research Interests
 
-- Machine learning for molecular medicine
+- Machine learning and artificial intelligence for drug discovery
 - Drug response prediction and treatment response modeling
 - Graph representation learning for biological and pharmacological data
 - Single-cell, perturbation, and intervention-aware representation learning
 - LLM-based biomedical reasoning and evidence integration
+- Precision oncology and computational molecular medicine
 
 ## Selected Publications
 
