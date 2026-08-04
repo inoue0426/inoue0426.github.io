@@ -26,6 +26,21 @@ if(profileLinks&&!profileLinks.querySelector('[data-cv-link]')){
   profileLinks.insertBefore(item,profileLinks.children[1]||null);
 }
 
+if(profileLinks){
+  const labels={
+    'Email':'✉️ Email',
+    'CV':'📄 CV',
+    'Google Scholar':'🎓 Google Scholar',
+    'ORCID':'🧬 ORCID',
+    'GitHub':'💻 GitHub',
+    'LinkedIn':'💼 LinkedIn'
+  };
+  profileLinks.querySelectorAll('a').forEach(link=>{
+    const label=link.textContent.trim();
+    if(labels[label]) link.textContent=labels[label];
+  });
+}
+
 const contactActions=document.querySelector('#contact .actions');
 if(contactActions&&!contactActions.querySelector('[data-cv-link]')){
   const link=document.createElement('a');
