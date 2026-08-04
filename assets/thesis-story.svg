@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">PhD thesis research pipeline</title><desc id="desc">Three stages: drGT interprets drug response, DrugAgent reasons over biomedical evidence, and a world model predicts patient state transitions.</desc>
+<rect width="1200" height="900" fill="#ffffff"/>
+<defs><style>.t{font-family:Inter,Arial,sans-serif;fill:#172033}.h{font-family:Georgia,serif;font-weight:700}.m{fill:#5d687a}.s{font-size:18px}.xs{font-size:14px}.b{font-weight:700}.line{stroke:#9aa6b7;stroke-width:2;fill:none}.thin{stroke:#cfd6df;stroke-width:1.5;fill:none}</style></defs>
+<g transform="translate(40 55)">
+<g transform="translate(0 0)"><circle cx="34" cy="24" r="22" fill="#194f8a"/><text x="34" y="31" text-anchor="middle" fill="#fff" class="t b" font-size="20">1</text><text x="72" y="31" class="t h" font-size="28" fill="#194f8a">Interpret</text><text x="190" y="31" class="t" font-size="26">→</text><text x="225" y="31" class="t h" font-size="28">drGT</text>
+<rect x="0" y="70" width="340" height="700" rx="20" fill="#fbfdff" stroke="#d9e4f1"/>
+<text x="170" y="110" text-anchor="middle" class="t b s" fill="#194f8a">Drug–Cell–Gene Network</text>
+<circle cx="70" cy="170" r="24" fill="#e7f0fb" stroke="#194f8a"/><circle cx="270" cy="170" r="24" fill="#eaf6ef" stroke="#2d8a57"/>
+<text x="70" y="176" text-anchor="middle" class="t xs">Drug</text><text x="270" y="176" text-anchor="middle" class="t xs">Gene</text>
+<g stroke="#aeb8c6"><line x1="95" y1="170" x2="145" y2="145"/><line x1="95" y1="170" x2="145" y2="205"/><line x1="145" y1="145" x2="205" y2="175"/><line x1="145" y1="205" x2="205" y2="175"/><line x1="205" y1="175" x2="245" y2="150"/><line x1="205" y1="175" x2="245" y2="205"/></g>
+<g fill="#194f8a"><circle cx="145" cy="145" r="8"/><circle cx="145" cy="205" r="8"/></g><g fill="#687386"><circle cx="205" cy="175" r="9"/></g><g fill="#2d8a57"><circle cx="245" cy="150" r="8"/><circle cx="245" cy="205" r="8"/></g>
+<text x="170" y="275" text-anchor="middle" class="t b s" fill="#194f8a">Attention-guided assessment</text>
+<rect x="40" y="320" width="135" height="120" fill="#eef4fb" stroke="#cbd8e7"/><g stroke="#fff"><line x1="67" y1="320" x2="67" y2="440"/><line x1="94" y1="320" x2="94" y2="440"/><line x1="121" y1="320" x2="121" y2="440"/><line x1="148" y1="320" x2="148" y2="440"/><line x1="40" y1="344" x2="175" y2="344"/><line x1="40" y1="368" x2="175" y2="368"/><line x1="40" y1="392" x2="175" y2="392"/><line x1="40" y1="416" x2="175" y2="416"/></g><rect x="121" y="368" width="27" height="24" fill="#e26d45"/><rect x="148" y="392" width="27" height="24" fill="#ef9a79"/>
+<text x="195" y="386" class="t" font-size="30">→</text><g fill="#5d83bd"><rect x="240" y="335" width="65" height="12"/><rect x="240" y="360" width="52" height="12"/><rect x="240" y="385" width="40" height="12"/><rect x="240" y="410" width="28" height="12"/></g>
+<text x="170" y="520" text-anchor="middle" class="t m s">Identify genes associated</text><text x="170" y="548" text-anchor="middle" class="t m s">with drug response.</text>
+</g>
+<g transform="translate(390 0)"><circle cx="34" cy="24" r="22" fill="#2d8a57"/><text x="34" y="31" text-anchor="middle" fill="#fff" class="t b" font-size="20">2</text><text x="72" y="31" class="t h" font-size="28" fill="#2d8a57">Reason</text><text x="180" y="31" class="t" font-size="26">→</text><text x="215" y="31" class="t h" font-size="28">DrugAgent</text>
+<rect x="0" y="70" width="340" height="700" rx="20" fill="#fcfefd" stroke="#d8eadf"/>
+<text x="170" y="110" text-anchor="middle" class="t b s" fill="#2d8a57">Biomedical Evidence</text>
+<g class="t xs"><text x="55" y="155">Literature</text><text x="145" y="155">Databases</text><text x="235" y="155">Knowledge</text></g>
+<rect x="55" y="175" width="34" height="46" rx="3" fill="#fff" stroke="#687386"/><ellipse cx="165" cy="180" rx="18" ry="7" fill="#fff" stroke="#687386"/><rect x="147" y="180" width="36" height="40" fill="#fff" stroke="#687386"/><circle cx="265" cy="195" r="7" fill="#687386"/><line x1="265" y1="195" x2="245" y2="177" class="line"/><line x1="265" y1="195" x2="286" y2="177" class="line"/><line x1="265" y1="195" x2="245" y2="216" class="line"/><line x1="265" y1="195" x2="286" y2="216" class="line"/>
+<g transform="translate(35 285)"><circle cx="45" cy="25" r="25" fill="#e7f0fb" stroke="#194f8a"/><circle cx="135" cy="25" r="25" fill="#eaf6ef" stroke="#2d8a57"/><circle cx="225" cy="25" r="25" fill="#f1eafb" stroke="#6840a8"/><text x="45" y="30" text-anchor="middle" class="t xs">R</text><text x="135" y="30" text-anchor="middle" class="t xs">A</text><text x="225" y="30" text-anchor="middle" class="t xs">C</text><text x="45" y="75" text-anchor="middle" class="t xs">Retrieve</text><text x="135" y="75" text-anchor="middle" class="t xs">Reason</text><text x="225" y="75" text-anchor="middle" class="t xs">Critique</text></g>
+<rect x="55" y="420" width="230" height="48" rx="12" fill="#fff8e9" stroke="#e9c96d"/><text x="170" y="451" text-anchor="middle" class="t b s">Aggregate &amp; calibrate</text>
+<rect x="70" y="505" width="200" height="52" rx="12" fill="#edf8f1" stroke="#8bc9a4"/><text x="170" y="538" text-anchor="middle" class="t b s" fill="#2d8a57">Answer with confidence</text>
+<text x="170" y="625" text-anchor="middle" class="t m s">Reconcile conflicting evidence</text><text x="170" y="653" text-anchor="middle" class="t m s">through multi-agent reasoning.</text>
+</g>
+<g transform="translate(780 0)"><circle cx="34" cy="24" r="22" fill="#6840a8"/><text x="34" y="31" text-anchor="middle" fill="#fff" class="t b" font-size="20">3</text><text x="72" y="31" class="t h" font-size="28" fill="#6840a8">Predict transitions</text>
+<text x="170" y="67" text-anchor="middle" class="t h" font-size="28">World Model</text>
+<rect x="0" y="70" width="340" height="700" rx="20" fill="#fdfcff" stroke="#e3d9f1"/>
+<text x="170" y="110" text-anchor="middle" class="t b s" fill="#6840a8">Drug-conditioned state transition</text>
+<g transform="translate(35 160)"><circle cx="45" cy="20" r="28" fill="#dfeafa" stroke="#5c86c7"/><circle cx="145" cy="20" r="28" fill="#e7f4eb" stroke="#7bbb95"/><circle cx="245" cy="20" r="28" fill="#eee6f8" stroke="#9b79c8"/><text x="95" y="28" class="t" font-size="28">→</text><text x="195" y="28" class="t" font-size="28">→</text><text x="45" y="75" text-anchor="middle" class="t xs">Initial state</text><text x="145" y="75" text-anchor="middle" class="t xs">Treatment</text><text x="245" y="75" text-anchor="middle" class="t xs">Next state</text></g>
+<rect x="45" y="300" width="250" height="95" rx="14" fill="#faf7fe" stroke="#a889d1" stroke-dasharray="7 5"/><text x="170" y="336" text-anchor="middle" class="t b s" fill="#6840a8">World model fθ</text><text x="170" y="366" text-anchor="middle" class="t m xs">Learn latent patient-state dynamics</text>
+<g transform="translate(35 465)" stroke="#6840a8" fill="none" stroke-width="3"><polyline points="0,80 35,65 70,68 105,40 140,48"/><polyline points="155,85 190,72 225,50 260,58" stroke-dasharray="7 5"/></g><line x1="35" y1="555" x2="305" y2="555" class="thin"/>
+<text x="170" y="625" text-anchor="middle" class="t m s">Forecast how patient state evolves</text><text x="170" y="653" text-anchor="middle" class="t m s">under drug intervention.</text>
+</g>
+</g></svg>
