@@ -4,11 +4,11 @@ A lightweight academic website designed for GitHub Pages. No build step or frame
 
 ## Published URL
 
-https://inoue0426.github.io/resume/
+https://inoue0426.github.io/
 
 ## GitHub Pages settings
 
-In **Settings → Pages**, choose **Deploy from a branch**, then select `main` and `/ (root)`.
+In **Settings → Pages**, choose **Deploy from a branch**, then select `master` and `/ (root)`.
 
 ## Content still requiring verification
 
