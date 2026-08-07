@@ -7,6 +7,7 @@
   <meta name="description" content="API reference and usage guide for Yoshitaka Inoue's research_toolbox: reproducibility, evaluation, chemistry, biomedical utilities, UniProt mapping, caching, and publication-ready visualization.">
   <link rel="canonical" href="https://inoue0426.github.io/research-toolbox/">
   <link rel="stylesheet" href="../assets/style.css?v=7">
+  <link rel="stylesheet" href="../assets/breadcrumbs.css">
   <style>
     .api-shell{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:2.5rem;align-items:start}
     .api-nav{position:sticky;top:5.5rem;border-left:1px solid var(--border,#ddd);padding-left:1rem;font-size:.92rem}
@@ -25,6 +26,7 @@
 <body>
 <header class="site-header"><div class="container nav-wrap"><a class="brand" href="../">Yoshitaka Inoue</a><nav style="display:flex"><a href="../projects.html">Projects</a><a href="https://github.com/inoue0426/research_toolbox">GitHub</a><a href="../#contact">Contact</a></nav></div></header>
 <main class="section"><div class="container">
+  <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../projects.html">Projects</a></li><li aria-current="page">Research Toolbox</li></ol></nav>
   <p class="section-label">Developer wiki</p>
   <h1>Research Toolbox API</h1>
   <p class="lead">A compact reference for the reusable utilities in <code>inoue0426/research_toolbox</code>. The preferred interface is the short facade: <code>import research_toolbox as rt</code>.</p>
@@ -60,7 +62,7 @@ gene = rt.uniprot_to_gene("P04637")</code></pre>
       <table class="api-table"><thead><tr><th>Function / class</th><th>Purpose</th></tr></thead><tbody>
         <tr><td><code>rt.seed(value=42, deterministic=True)</code></td><td>Seed Python, NumPy, and PyTorch when available.</td></tr>
         <tr><td><code>rt.evaluate_binary(y_true, y_score, threshold=0.5)</code></td><td>Compute common binary-classification metrics.</td></tr>
-        <tr><td><code>rt.summarize_evaluations(results)</code></td><td>Aggregate repeated metric dictionaries with mean, standard deviation, and valid count.</td></tr>
+        <tr><td><code>rt.summarize_runs(results)</code></td><td>Summarize metrics across repeated runs or seeds with mean, standard deviation, and valid count.</td></tr>
         <tr><td><code>rt.fingerprint(smiles, ...)</code></td><td>Create one Morgan fingerprint.</td></tr>
         <tr><td><code>rt.fingerprints(smiles_iterable, ...)</code></td><td>Create Morgan fingerprints in batch.</td></tr>
         <tr><td><code>rt.open_cache(path=".cache")</code></td><td>Open a persistent JSON-backed cache.</td></tr>
@@ -117,10 +119,12 @@ record.protein_name</code></pre>
     <section class="api-section" id="evaluation"><h2>Evaluation</h2>
       <table class="api-table"><thead><tr><th>API</th><th>Notes</th></tr></thead><tbody>
         <tr><td><code>evaluate_binary</code><br><code>compute_binary_metrics</code></td><td>Accuracy, balanced accuracy, precision, recall, specificity, F1, F2, G-mean, MCC, Cohen's κ, Brier score, AUROC, AUPR, and log loss. Single-class AUROC/AUPR are returned as <code>nan</code>.</td></tr>
-        <tr><td><code>summarize_evaluations</code><br><code>summarize_binary_metrics</code></td><td>Summarize repeated runs into a pandas DataFrame with mean/std/n.</td></tr>
+        <tr><td><code>summarize_runs</code><br><code>summarize_evaluations</code><br><code>summarize_binary_metrics</code></td><td>Summarize repeated runs into a pandas DataFrame with mean/std/n. <code>summarize_runs</code> is the recommended name.</td></tr>
       </tbody></table>
-<pre><code>metrics = rt.evaluate_binary(y_true, y_prob, threshold=0.5)
-summary = rt.summarize_evaluations([run1, run2, run3])</code></pre>
+<pre><code>run1 = rt.evaluate_binary(y_true, pred_seed_1)
+run2 = rt.evaluate_binary(y_true, pred_seed_2)
+run3 = rt.evaluate_binary(y_true, pred_seed_3)
+summary = rt.summarize_runs([run1, run2, run3])</code></pre>
     </section>
 
     <section class="api-section" id="chemistry"><h2>Chemistry</h2>
@@ -179,7 +183,7 @@ value = rt.cached_lookup(cache, "expensive", expensive_function)</code></pre>
     </section>
 
     <section class="api-section" id="viz"><h2>Visualization</h2>
-      <p>The plotting API is optimized for publication figures that remain editable in Adobe Illustrator: Arial-first, PDF/PS Type 42 fonts, SVG text preserved as text, vector-first export, and 600 dpi raster fallback.</p>
+      <p>The plotting API is optimized for publication figures that remain editable in Adobe Illustrator: Arial-first, all shared text defaults at 10 pt, PDF/PS Type 42 fonts, SVG text preserved as text, vector-first export, and 600 dpi raster fallback.</p>
 <pre><code>fig, ax = rt.viz.scatter(
     y_true, y_pred,
     xlabel="Observed",
@@ -195,7 +199,7 @@ rt.viz.save(fig, "figures/prediction")</code></pre>
         <tr><td><code>rt.viz.box</code></td><td>Box plot with optional raw-point overlay.</td></tr>
         <tr><td><code>rt.viz.heatmap</code></td><td>Dependency-light Matplotlib heatmap.</td></tr>
         <tr><td><code>rt.viz.save</code></td><td>Export PDF/SVG/PNG (or selected formats).</td></tr>
-        <tr><td><code>FigureConfig</code></td><td>Reusable width/font/line/marker/DPI configuration.</td></tr>
+        <tr><td><code>FigureConfig</code></td><td>Reusable width/font/line/marker/DPI configuration; default font size is 10 pt.</td></tr>
         <tr><td><code>SINGLE_COLUMN</code></td><td>89 mm publication preset.</td></tr>
         <tr><td><code>DOUBLE_COLUMN</code></td><td>178 mm publication preset.</td></tr>
         <tr><td><code>new_figure</code></td><td>Create a styled Matplotlib figure.</td></tr>
