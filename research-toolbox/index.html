@@ -6,32 +6,26 @@
   <title>Research Toolbox API | Yoshitaka Inoue</title>
   <meta name="description" content="API reference and usage guide for Yoshitaka Inoue's research_toolbox: reproducibility, evaluation, chemistry, biomedical utilities, UniProt mapping, caching, and publication-ready visualization.">
   <link rel="canonical" href="https://inoue0426.github.io/research-toolbox/">
-  <link rel="stylesheet" href="../assets/style.css?v=7">
+  <link rel="stylesheet" href="../assets/style.css?v=8">
   <link rel="stylesheet" href="../assets/breadcrumbs.css">
-  <style>
-    .api-shell{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:2.5rem;align-items:start}
-    .api-nav{position:sticky;top:5.5rem;border-left:1px solid var(--border,#ddd);padding-left:1rem;font-size:.92rem}
-    .api-nav a{display:block;margin:.45rem 0}
-    .api-section{margin:3rem 0}
-    .api-table{width:100%;border-collapse:collapse;font-size:.95rem}
-    .api-table th,.api-table td{text-align:left;vertical-align:top;padding:.65rem .55rem;border-bottom:1px solid var(--border,#ddd)}
-    .api-table code{white-space:nowrap}
-    .callout{padding:1rem 1.1rem;border-left:3px solid currentColor;background:rgba(127,127,127,.08);margin:1.25rem 0}
-    pre{overflow:auto;padding:1rem;border-radius:8px;background:#f5f5f5}
-    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-    .tag{display:inline-block;padding:.12rem .45rem;border:1px solid var(--border,#ccc);border-radius:999px;font-size:.75rem;margin-right:.25rem}
-    @media(max-width:850px){.api-shell{grid-template-columns:1fr}.api-nav{position:static;border-left:0;border-top:1px solid var(--border,#ddd);padding:1rem 0}.api-nav a{display:inline-block;margin:.3rem .7rem .3rem 0}}
-  </style>
+  <link rel="stylesheet" href="../assets/toolbox.css?v=8">
 </head>
 <body>
-<header class="site-header"><div class="container nav-wrap"><a class="brand" href="../">Yoshitaka Inoue</a><nav style="display:flex"><a href="../projects.html">Projects</a><a href="https://github.com/inoue0426/research_toolbox">GitHub</a><a href="../#contact">Contact</a></nav></div></header>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="../">Yoshitaka Inoue</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav">
+      <a href="../#research">Research</a><a href="../publications/">Publications</a><a href="../projects.html">Projects</a><a href="https://github.com/inoue0426/research_ideas">Research Ideas</a><a href="https://github.com/inoue0426/CV/blob/main/main.pdf">CV</a><a href="../news.html">News</a>
+    </nav>
+  </div>
+</header>
 <main class="section"><div class="container">
   <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../projects.html">Projects</a></li><li aria-current="page">Research Toolbox</li></ol></nav>
   <p class="section-label">Developer wiki</p>
   <h1>Research Toolbox API</h1>
   <p class="lead">A compact reference for the reusable utilities in <code>inoue0426/research_toolbox</code>. The preferred interface is the short facade: <code>import research_toolbox as rt</code>.</p>
   <div class="callout"><strong>Design rule.</strong> Common operations get short names; domain modules retain explicit long-form APIs. Scientific assumptions such as thresholds, organism, review status, and invalid-input behavior stay configurable.</div>
-
   <div class="api-shell">
   <article>
     <section class="api-section" id="install"><h2>Install</h2>
@@ -45,7 +39,6 @@ pip install -e '.[chemistry]'
 pip install -e '.[visualization]'
 pip install -e '.[all]'</code></pre>
     </section>
-
     <section class="api-section" id="quick"><h2>Quick start</h2>
 <pre><code>import research_toolbox as rt
 
@@ -57,7 +50,6 @@ sections = rt.read_pmc("article.xml")
 uid = rt.gene_to_uniprot("TP53")
 gene = rt.uniprot_to_gene("P04637")</code></pre>
     </section>
-
     <section class="api-section" id="facade"><h2>Top-level API</h2>
       <table class="api-table"><thead><tr><th>Function / class</th><th>Purpose</th></tr></thead><tbody>
         <tr><td><code>rt.seed(value=42, deterministic=True)</code></td><td>Seed Python, NumPy, and PyTorch when available.</td></tr>
@@ -80,7 +72,6 @@ gene = rt.uniprot_to_gene("P04637")</code></pre>
         <tr><td><code>rt.UniProtRecord</code></td><td>Structured UniProt record containing accession, gene, entry, organism, review status, and protein name.</td></tr>
       </tbody></table>
     </section>
-
     <section class="api-section" id="uniprot"><h2>Gene ↔ UniProt</h2>
       <p>The default mapping behavior is intentionally opinionated for the common biomedical case: <span class="tag">human</span><span class="tag">organism_id=9606</span><span class="tag">reviewed=True</span>. These filters can be overridden.</p>
 <pre><code>import research_toolbox as rt
@@ -115,7 +106,6 @@ record.reviewed
 record.protein_name</code></pre>
       <p>Network/API failures raise exceptions; a valid query with no match returns <code>None</code>. This keeps “not found” distinct from “request failed.”</p>
     </section>
-
     <section class="api-section" id="evaluation"><h2>Evaluation</h2>
       <table class="api-table"><thead><tr><th>API</th><th>Notes</th></tr></thead><tbody>
         <tr><td><code>evaluate_binary</code><br><code>compute_binary_metrics</code></td><td>Accuracy, balanced accuracy, precision, recall, specificity, F1, F2, G-mean, MCC, Cohen's κ, Brier score, AUROC, AUPR, and log loss. Single-class AUROC/AUPR are returned as <code>nan</code>.</td></tr>
@@ -126,7 +116,6 @@ run2 = rt.evaluate_binary(y_true, pred_seed_2)
 run3 = rt.evaluate_binary(y_true, pred_seed_3)
 summary = rt.summarize_runs([run1, run2, run3])</code></pre>
     </section>
-
     <section class="api-section" id="chemistry"><h2>Chemistry</h2>
       <table class="api-table"><thead><tr><th>API</th><th>Purpose</th></tr></thead><tbody>
         <tr><td><code>fingerprint</code><br><code>smiles_to_morgan_fingerprint</code></td><td>SMILES → Morgan bit vector (NumPy array).</td></tr>
@@ -141,7 +130,6 @@ summary = rt.summarize_runs([run1, run2, run3])</code></pre>
 )</code></pre>
       <p>RDKit is an optional dependency. Invalid-SMILES behavior is explicit rather than silently substituting a plausible-looking vector.</p>
     </section>
-
     <section class="api-section" id="cache"><h2>Caching</h2>
       <p><code>JSONFileCache</code> stores one JSON-serializable value per hashed key and writes atomically.</p>
 <pre><code>cache = rt.open_cache(".cache")
@@ -156,32 +144,21 @@ cache.clear()
 value = cache.get_or_set("expensive", expensive_function)
 value = rt.cached_lookup(cache, "expensive", expensive_function)</code></pre>
       <table class="api-table"><thead><tr><th>Method</th><th>Purpose</th></tr></thead><tbody>
-        <tr><td><code>get(key, default=None)</code></td><td>Read a cached value.</td></tr>
-        <tr><td><code>set(key, value)</code></td><td>Atomically write a value.</td></tr>
-        <tr><td><code>get_or_set(key, fetcher, cache_none=True)</code></td><td>Compute only on cache miss.</td></tr>
-        <tr><td><code>contains(key)</code></td><td>Check key presence.</td></tr>
-        <tr><td><code>delete(key)</code></td><td>Delete one entry.</td></tr>
-        <tr><td><code>clear()</code></td><td>Remove all JSON cache entries.</td></tr>
+        <tr><td><code>get(key, default=None)</code></td><td>Read a cached value.</td></tr><tr><td><code>set(key, value)</code></td><td>Atomically write a value.</td></tr><tr><td><code>get_or_set(key, fetcher, cache_none=True)</code></td><td>Compute only on cache miss.</td></tr><tr><td><code>contains(key)</code></td><td>Check key presence.</td></tr><tr><td><code>delete(key)</code></td><td>Delete one entry.</td></tr><tr><td><code>clear()</code></td><td>Remove all JSON cache entries.</td></tr>
       </tbody></table>
     </section>
-
     <section class="api-section" id="biomed"><h2>Biomedical text</h2>
       <table class="api-table"><thead><tr><th>API</th><th>Purpose</th></tr></thead><tbody>
         <tr><td><code>read_pmc</code><br><code>extract_pmc_sections</code></td><td>Heuristically extract Abstract, Introduction, Methods, Results, and Discussion-like sections from JATS/PMC XML.</td></tr>
-        <tr><td><code>normalize_drug</code> / <code>normalize_drug_name</code></td><td>Whitespace normalization + lowercase.</td></tr>
-        <tr><td><code>normalize_gene</code> / <code>normalize_gene_name</code></td><td>Whitespace normalization + uppercase.</td></tr>
-        <tr><td><code>normalize_protein</code> / <code>normalize_protein_name</code></td><td>Whitespace normalization + uppercase.</td></tr>
-        <tr><td><code>normalize_text</code> / <code>clean_text_for_matching</code></td><td>Collapse whitespace + lowercase free text.</td></tr>
+        <tr><td><code>normalize_drug</code> / <code>normalize_drug_name</code></td><td>Whitespace normalization + lowercase.</td></tr><tr><td><code>normalize_gene</code> / <code>normalize_gene_name</code></td><td>Whitespace normalization + uppercase.</td></tr><tr><td><code>normalize_protein</code> / <code>normalize_protein_name</code></td><td>Whitespace normalization + uppercase.</td></tr><tr><td><code>normalize_text</code> / <code>clean_text_for_matching</code></td><td>Collapse whitespace + lowercase free text.</td></tr>
       </tbody></table>
       <div class="callout">Normalization helpers are string normalization only. They are not biomedical entity resolution. Use the UniProt mapping utilities when identifier resolution is needed.</div>
     </section>
-
     <section class="api-section" id="repro"><h2>Reproducibility</h2>
 <pre><code>info = rt.seed(42, deterministic=True)
 # alias: from reproducibility import seed_everything</code></pre>
       <p>Seeds Python, NumPy, PyTorch CPU, and CUDA when PyTorch is installed. Deterministic execution can affect speed and does not guarantee bitwise identity across different hardware/software stacks.</p>
     </section>
-
     <section class="api-section" id="viz"><h2>Visualization</h2>
       <p>The plotting API is optimized for publication figures that remain editable in Adobe Illustrator: Arial-first, all shared text defaults at 10 pt, PDF/PS Type 42 fonts, SVG text preserved as text, vector-first export, and 600 dpi raster fallback.</p>
 <pre><code>fig, ax = rt.viz.scatter(
@@ -192,30 +169,10 @@ value = rt.cached_lookup(cache, "expensive", expensive_function)</code></pre>
 )
 rt.viz.save(fig, "figures/prediction")</code></pre>
       <table class="api-table"><thead><tr><th>API</th><th>Purpose</th></tr></thead><tbody>
-        <tr><td><code>rt.viz.line</code></td><td>Publication-ready line plot.</td></tr>
-        <tr><td><code>rt.viz.scatter</code></td><td>Scatter plot with optional identity line.</td></tr>
-        <tr><td><code>rt.viz.bar</code></td><td>Bar plot with optional errors / horizontal layout.</td></tr>
-        <tr><td><code>rt.viz.grouped_bar</code></td><td>Grouped bars from named series.</td></tr>
-        <tr><td><code>rt.viz.box</code></td><td>Box plot with optional raw-point overlay.</td></tr>
-        <tr><td><code>rt.viz.heatmap</code></td><td>Dependency-light Matplotlib heatmap.</td></tr>
-        <tr><td><code>rt.viz.save</code></td><td>Export PDF/SVG/PNG (or selected formats).</td></tr>
-        <tr><td><code>FigureConfig</code></td><td>Reusable width/font/line/marker/DPI configuration; default font size is 10 pt.</td></tr>
-        <tr><td><code>SINGLE_COLUMN</code></td><td>89 mm publication preset.</td></tr>
-        <tr><td><code>DOUBLE_COLUMN</code></td><td>178 mm publication preset.</td></tr>
-        <tr><td><code>new_figure</code></td><td>Create a styled Matplotlib figure.</td></tr>
-        <tr><td><code>illustrator_style</code></td><td>Temporary style context manager.</td></tr>
-        <tr><td><code>set_illustrator_style</code></td><td>Apply style globally.</td></tr>
-        <tr><td><code>style_axis</code></td><td>Apply shared styling to an existing axis.</td></tr>
-        <tr><td><code>add_panel_label</code></td><td>Add panel labels such as A/B/C.</td></tr>
-        <tr><td><code>label_panels</code></td><td>Sequentially label multiple axes.</td></tr>
-        <tr><td><code>add_significance_bar</code></td><td>Add a significance bracket and label.</td></tr>
-        <tr><td><code>figure_size</code></td><td>Convert target publication width to Matplotlib figsize.</td></tr>
-        <tr><td><code>mm_to_inches</code></td><td>Millimeter → inch conversion.</td></tr>
+        <tr><td><code>rt.viz.line</code></td><td>Publication-ready line plot.</td></tr><tr><td><code>rt.viz.scatter</code></td><td>Scatter plot with optional identity line.</td></tr><tr><td><code>rt.viz.bar</code></td><td>Bar plot with optional errors / horizontal layout.</td></tr><tr><td><code>rt.viz.grouped_bar</code></td><td>Grouped bars from named series.</td></tr><tr><td><code>rt.viz.box</code></td><td>Box plot with optional raw-point overlay.</td></tr><tr><td><code>rt.viz.heatmap</code></td><td>Dependency-light Matplotlib heatmap.</td></tr><tr><td><code>rt.viz.save</code></td><td>Export PDF/SVG/PNG (or selected formats).</td></tr><tr><td><code>FigureConfig</code></td><td>Reusable width/font/line/marker/DPI configuration; default font size is 10 pt.</td></tr><tr><td><code>SINGLE_COLUMN</code></td><td>89 mm publication preset.</td></tr><tr><td><code>DOUBLE_COLUMN</code></td><td>178 mm publication preset.</td></tr><tr><td><code>new_figure</code></td><td>Create a styled Matplotlib figure.</td></tr><tr><td><code>illustrator_style</code></td><td>Temporary style context manager.</td></tr><tr><td><code>set_illustrator_style</code></td><td>Apply style globally.</td></tr><tr><td><code>style_axis</code></td><td>Apply shared styling to an existing axis.</td></tr><tr><td><code>add_panel_label</code></td><td>Add panel labels such as A/B/C.</td></tr><tr><td><code>label_panels</code></td><td>Sequentially label multiple axes.</td></tr><tr><td><code>add_significance_bar</code></td><td>Add a significance bracket and label.</td></tr><tr><td><code>figure_size</code></td><td>Convert target publication width to Matplotlib figsize.</td></tr><tr><td><code>mm_to_inches</code></td><td>Millimeter → inch conversion.</td></tr>
       </tbody></table>
     </section>
-
-    <section class="api-section" id="domains"><h2>Domain imports</h2>
-      <p>The facade is recommended, but explicit imports remain supported.</p>
+    <section class="api-section" id="domains"><h2>Domain imports</h2><p>The facade is recommended, but explicit imports remain supported.</p>
 <pre><code>from evaluation import evaluate_binary, compute_binary_metrics
 from chemistry import fingerprint, smiles_to_morgan_fingerprint
 from caching import open_cache, JSONFileCache, cached_lookup
@@ -229,30 +186,11 @@ from biomed import (
 from reproducibility import seed, seed_everything
 from visualization import scatter, save, FigureConfig</code></pre>
     </section>
-
-    <section class="api-section" id="source"><h2>Source and maintenance</h2>
-      <p><a href="https://github.com/inoue0426/research_toolbox">GitHub repository →</a></p>
-      <p>This page is a human-readable API catalog. When the toolbox changes, this page should be updated alongside the public facade and module <code>__all__</code> exports.</p>
-    </section>
+    <section class="api-section" id="source"><h2>Source and maintenance</h2><p><a href="https://github.com/inoue0426/research_toolbox">GitHub repository →</a></p><p>This page is a human-readable API catalog. When the toolbox changes, this page should be updated alongside the public facade and module <code>__all__</code> exports.</p></section>
   </article>
-
-  <aside class="api-nav" aria-label="API navigation">
-    <strong>On this page</strong>
-    <a href="#install">Install</a>
-    <a href="#quick">Quick start</a>
-    <a href="#facade">Top-level API</a>
-    <a href="#uniprot">Gene ↔ UniProt</a>
-    <a href="#evaluation">Evaluation</a>
-    <a href="#chemistry">Chemistry</a>
-    <a href="#cache">Caching</a>
-    <a href="#biomed">Biomedical text</a>
-    <a href="#repro">Reproducibility</a>
-    <a href="#viz">Visualization</a>
-    <a href="#domains">Domain imports</a>
-    <a href="#source">Source</a>
-  </aside>
+  <aside class="api-nav" aria-label="API navigation"><strong>On this page</strong><a href="#install">Install</a><a href="#quick">Quick start</a><a href="#facade">Top-level API</a><a href="#uniprot">Gene ↔ UniProt</a><a href="#evaluation">Evaluation</a><a href="#chemistry">Chemistry</a><a href="#cache">Caching</a><a href="#biomed">Biomedical text</a><a href="#repro">Reproducibility</a><a href="#viz">Visualization</a><a href="#domains">Domain imports</a><a href="#source">Source</a></aside>
   </div>
-
-  <p style="margin-top:2rem"><a href="../projects.html">← Back to projects</a></p>
+  <p class="utility-back"><a href="../projects.html">← Back to projects</a></p>
 </div></main>
+<script src="../assets/main.js?v=8" defer></script>
 </body></html>

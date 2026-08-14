@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inoue0426.github.io/sitemap.xml
