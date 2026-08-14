@@ -8,7 +8,7 @@
   <meta name="author" content="Yoshitaka Inoue">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://inoue0426.github.io/">
-  <link rel="stylesheet" href="assets/style.css?v=9">
+  <link rel="stylesheet" href="assets/style.css?v=10">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://inoue0426.github.io/#person","name":"Yoshitaka Inoue","url":"https://inoue0426.github.io/","jobTitle":"PhD Candidate and Pre-doctoral Fellow","email":"mailto:inoue.yoshitaka.iv1@gmail.com","affiliation":[{"@type":"Organization","name":"University of Minnesota"},{"@type":"Organization","name":"National Library of Medicine / National Cancer Institute"}],"sameAs":["https://scholar.google.co.jp/citations?user=aBizyLkAAAAJ&hl=en","https://orcid.org/0000-0003-4432-8166","https://github.com/inoue0426","https://www.linkedin.com/in/inoue0426/"]},{"@type":"WebSite","url":"https://inoue0426.github.io/","name":"Yoshitaka Inoue — Research Portfolio","author":{"@id":"https://inoue0426.github.io/#person"}}]}</script>
 </head>
@@ -20,8 +20,11 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav">
       <a href="#research">Research</a>
-      <a href="#work">Work</a>
+      <a href="projects.html">Projects</a>
       <a href="publications/">Publications</a>
+      <a href="https://inoue0426.github.io/research_ideas/index.html">Research Ideas</a>
+      <a href="service.html">Service</a>
+      <a href="news.html">News</a>
       <a href="https://github.com/inoue0426/CV/blob/main/main.pdf" target="_blank" rel="noopener">CV</a>
     </nav>
   </div>
@@ -30,16 +33,23 @@
 <main id="main">
   <section class="hero" id="top">
     <div class="container hero-copy">
-      <p class="eyebrow">Yoshitaka Inoue · UMN / NIH</p>
-      <h1>AI for therapeutic response and precision medicine.</h1>
-      <p class="lead">I study how shared biological representations emerge across molecular, cellular, and patient contexts, and how they can support transferable and interpretable models of therapeutic response.</p>
-      <div class="actions">
-        <a class="button primary" href="#research">Research</a>
-        <a class="button" href="publications/">Publications</a>
-        <a class="button" href="https://github.com/inoue0426/CV/blob/main/main.pdf" target="_blank" rel="noopener">CV</a>
-        <a class="text-link" href="https://github.com/inoue0426/research_ideas" target="_blank" rel="noopener">Research Ideas ↗</a>
+      <div class="hero-text">
+        <p class="eyebrow">Yoshitaka Inoue · UMN / NIH</p>
+        <h1>AI for therapeutic response and precision medicine.</h1>
+        <p class="lead">I study how shared biological representations emerge across molecular, cellular, and patient contexts, and how they can support transferable and interpretable models of therapeutic response.</p>
+        <div class="actions">
+          <a class="button primary" href="#research">Research</a>
+          <a class="button" href="publications/">Publications</a>
+          <a class="button" href="https://github.com/inoue0426/CV/blob/main/main.pdf" target="_blank" rel="noopener">CV</a>
+          <a class="text-link" href="https://inoue0426.github.io/research_ideas/index.html">Research Ideas ↗</a>
+        </div>
       </div>
-      <p class="affiliation">PhD Candidate, University of Minnesota · Pre-doctoral Fellow, National Library of Medicine / National Cancer Institute</p>
+      <aside class="hero-profile-card" aria-label="Yoshitaka Inoue profile">
+        <img class="profile-photo" src="assets/profile.jpg" alt="Portrait of Yoshitaka Inoue" width="320" height="320" loading="eager" decoding="async">
+        <h2>Yoshitaka Inoue</h2>
+        <p><strong>PhD Candidate</strong><br>Computer Science and Engineering<br>University of Minnesota</p>
+        <p><strong>Pre-doctoral Fellow</strong><br>National Library of Medicine / National Cancer Institute</p>
+      </aside>
     </div>
   </section>
 
@@ -93,7 +103,7 @@
         <article class="work-item">
           <p class="work-index">03</p>
           <div><h3>Treatment-conditioned representation learning</h3><p>Current work on latent spaces that preserve transferable biological structure while explicitly modeling intervention and context.</p></div>
-          <div class="work-links"><a href="https://github.com/inoue0426/research_ideas">Research Ideas ↗</a></div>
+          <div class="work-links"><a href="https://inoue0426.github.io/research_ideas/index.html">Research Ideas ↗</a></div>
         </article>
       </div>
     </div>
@@ -106,9 +116,9 @@
         <a href="publications/">All publications →</a>
       </div>
       <ol class="publication-list compact">
-        <li><span class="year">2026</span><div><strong>drGT: Attention-Guided Gene Assessment of Drug Response Utilizing a Drug-Cell-Gene Heterogeneous Network</strong><p class="meta"><em>BMC Bioinformatics</em> · <a href="https://doi.org/10.1186/s12859-026-06417-z">DOI</a> · <a href="https://github.com/inoue0426/drGT">Code</a></p></div></li>
-        <li><span class="year">2026</span><div><strong>TRPM4 Expression as a Predictive Biomarker and a Mechanistic Driver of Acetalax Activity in Prostate Cancer</strong><p class="meta"><em>Molecular Cancer Therapeutics</em> · <a href="https://doi.org/10.1158/1535-7163.MCT-26-0011">DOI</a></p></div></li>
-        <li><span class="year">2026</span><div><strong>CellMiner cross-database (CellMinerCDB) version 2.2</strong><p class="meta"><em>Nucleic Acids Research</em> · <a href="https://doi.org/10.1093/nar/gkaf1230">DOI</a></p></div></li>
+        <li><span class="year">2026</span><div><strong>drGT: Interpretable Drug Response Prediction with Attention-Guided Gene Attribution on a Drug-Cell-Gene Heterogeneous Graph</strong><p class="meta"><em>BMC Bioinformatics</em> · <a href="https://doi.org/10.1186/s12859-026-06417-z">DOI</a> · <a href="https://github.com/inoue0426/drGT">Code</a></p></div></li>
+        <li><span class="year">2026</span><div><strong>TRPM4 Expression as a Predictive Biomarker and a Mechanistic Driver of Acetalax Activity in Prostate Cancer: Preclinical Efficacy Studies</strong><p class="meta"><em>Molecular Cancer Therapeutics</em> · <a href="https://doi.org/10.1158/1535-7163.MCT-26-0011">DOI</a></p></div></li>
+        <li><span class="year">2026</span><div><strong>CellMiner cross-database (CellMinerCDB) version 2.2 for explorations of patient-derived cancer cell line pharmacogenomics</strong><p class="meta"><em>Nucleic Acids Research</em> · <a href="https://doi.org/10.1093/nar/gkaf1230">DOI</a></p></div></li>
       </ol>
     </div>
   </section>
@@ -132,6 +142,6 @@
     <p class="footer-links"><a href="mailto:inoue.yoshitaka.iv1@gmail.com">Email</a><a href="https://scholar.google.co.jp/citations?user=aBizyLkAAAAJ&hl=en">Scholar</a><a href="https://orcid.org/0000-0003-4432-8166">ORCID</a><a href="https://github.com/inoue0426">GitHub</a><a href="https://www.linkedin.com/in/inoue0426/">LinkedIn</a></p>
   </div>
 </footer>
-<script src="assets/main.js?v=9" defer></script>
+<script src="assets/main.js?v=10" defer></script>
 </body>
 </html>

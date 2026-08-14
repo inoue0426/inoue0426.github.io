@@ -23,12 +23,18 @@ img{max-width:100%;height:auto}
 .site-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.93);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
 .nav-wrap{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
 .brand{font-weight:800;color:var(--text);text-decoration:none;font-size:1rem;white-space:nowrap}
-.site-nav{display:flex;gap:1.25rem;align-items:center}
-.site-nav a{color:var(--muted);text-decoration:none;font-weight:650;font-size:.9rem}
-.site-nav a:hover{color:var(--text)}
+.site-nav{display:flex;gap:1.05rem;align-items:center}
+.site-nav a{color:var(--muted);text-decoration:none;font-weight:650;font-size:.88rem}
+.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--text)}
 .nav-toggle{display:none}
 .hero{padding:7.5rem 0 6.5rem}
-.hero-copy{max-width:900px}
+.hero-copy{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:4rem;align-items:center}
+.hero-text{min-width:0}
+.hero-profile-card{margin:0;justify-self:end;width:270px;padding:1.25rem;border:1px solid var(--line);border-radius:.8rem;background:#fff;box-shadow:0 10px 30px rgba(20,35,60,.06)}
+.hero-profile-card .profile-photo{display:block;width:112px;height:112px;object-fit:cover;object-position:center 30%;border-radius:50%;margin:0 0 1rem;border:1px solid var(--line);filter:saturate(.9) contrast(.98)}
+.hero-profile-card h2{font-family:Georgia,"Times New Roman",serif;font-size:1.25rem;line-height:1.15;margin:.1rem 0 1rem}
+.hero-profile-card p{margin:.75rem 0 0;color:var(--muted);font-size:.88rem;line-height:1.5}
+.hero-profile-card strong{color:var(--text)}
 .eyebrow,.section-label{color:var(--accent);font-size:.73rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
 .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(3.1rem,7vw,6.3rem);line-height:.96;letter-spacing:-.045em;margin:.5rem 0 1.5rem;max-width:900px}
 .lead{font-size:clamp(1.1rem,2vw,1.35rem);color:var(--muted);max-width:800px}
@@ -116,6 +122,9 @@ img{max-width:100%;height:auto}
 }
 @media(max-width:800px){
   .hero{padding:5.5rem 0 4.5rem}
+  .hero-copy{grid-template-columns:1fr;gap:2rem}
+  .hero-profile-card{justify-self:start;width:min(100%,360px)}
+  .hero-profile-card .profile-photo{width:96px;height:96px}
   .nav-toggle{display:block;border:1px solid var(--line);background:#fff;border-radius:.4rem;padding:.45rem .7rem}
   .site-nav{display:none;position:absolute;left:1rem;right:1rem;top:58px;flex-direction:column;align-items:flex-start;background:#fff;padding:1rem;border:1px solid var(--line);box-shadow:var(--shadow)}
   .site-nav.open{display:flex}
