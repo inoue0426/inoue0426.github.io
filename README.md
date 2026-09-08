@@ -1,26 +1,17 @@
-# Yoshitaka Inoue — Academic Website
+# Yoshitaka Inoue — Research Portfolio
 
-A lightweight academic website designed for GitHub Pages. No build step or framework is required.
+Personal research website for Yoshitaka Inoue, PhD Candidate in Computer Science and Engineering at the University of Minnesota and Pre-doctoral Fellow at the National Library of Medicine / National Cancer Institute.
 
-## Published URL
+The site presents a research program centered on learning how biological systems respond to therapeutic interventions, including treatment-conditioned state-transition modeling, therapeutic-response prediction, biomedical reasoning, and translational pharmacogenomics.
+
+## Website
 
 https://inoue0426.github.io/
 
-## GitHub Pages settings
+## Research themes
 
-In **Settings → Pages**, choose **Deploy from a branch**, then select `master` and `/ (root)`.
-
-## Content still requiring verification
-
-- Add a verified CV before enabling a CV download link.
-- Replace publication summaries with exact citations, author lists, venues, DOI links, and publication status.
-- Add verified Google Scholar, LinkedIn, email, and project links as appropriate.
-- Verify institutional titles and affiliations.
-- Convert `assets/og-image.svg` to PNG for broader social-platform compatibility.
-
-## SEO checklist after launch
-
-- Submit `sitemap.xml` in Google Search Console.
-- Add complete publication metadata and stable external links.
-- Keep headings, title tags, and visible page content consistent.
-- Add descriptive alt text to future images.
+- Biological dynamics under therapeutic intervention
+- Transfer across cellular, molecular, and patient contexts
+- Interpretable therapeutic-response modeling
+- Biomedical reasoning and AI for therapeutic discovery
+- Single-cell and pharmacogenomic representation learning
