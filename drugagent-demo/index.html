@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore saved DrugAgent examples and the ML, knowledge graph, and literature evidence behind their recorded decisions.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://inoue0426.github.io/drugagent-demo/">
+  <link rel="stylesheet" href="../assets/style.css?v=10">
+  <link rel="stylesheet" href="../assets/breadcrumbs.css">
+  <title>DrugAgent Evidence Explorer | Yoshitaka Inoue</title>
+  <style>
+    .demo-shell {max-width:1080px;margin:0 auto;padding:2.4rem 1.4rem 5rem}
+    .demo-lead {max-width:780px;color:#43536a;line-height:1.7}
+    .demo-kicker {text-transform:uppercase;letter-spacing:.12em;font-weight:700;font-size:.75rem;color:#346b77}
+    .demo-panel {background:#fff;border:1px solid #dce5e9;border-radius:18px;padding:1.45rem;box-shadow:0 12px 40px rgba(28,48,65,.06);margin-top:1.5rem}
+    .demo-panel h2,.demo-panel h3 {margin-top:0}
+    .demo-select {display:block;max-width:500px;width:100%;padding:.8rem 1rem;border:1px solid #a9bac3;border-radius:10px;background:#fff;color:#173142;font:inherit}
+    .demo-select:focus-visible, .demo-link:focus-visible {outline:3px solid #257b8a;outline-offset:3px}
+    .demo-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}
+    .demo-grid .demo-panel {margin:0;min-width:0}
+    .demo-meta {display:flex;flex-wrap:wrap;gap:.65rem;margin:.7rem 0 1.15rem}
+    .demo-chip {display:inline-block;border-radius:99px;padding:.3rem .7rem;background:#e9f3f2;color:#174f58;font-weight:700;font-size:.86rem}
+    .demo-muted {color:#4c5c6a}
+    .demo-copy {line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+    .demo-label {text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:#4f6573;font-weight:800}
+    .demo-footnote {font-size:.9rem;line-height:1.6;color:#516274}
+    .demo-resource {margin-top:.85rem}
+    .demo-resource a {overflow-wrap:anywhere}
+    [hidden] {display:none!important}
+    @media(max-width:800px){.demo-grid{grid-template-columns:1fr}.demo-shell{padding:1.5rem 1rem 4rem}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container nav-wrap">
+    <a class="brand" href="../">Yoshitaka Inoue</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav"><a href="../#research">Research</a><a href="../projects.html">Projects</a><a href="../publications/">Publications</a><a href="../service.html">Service</a></nav>
+  </div></header>
+  <main class="demo-shell">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../projects.html">Projects</a></li><li aria-current="page">DrugAgent demo</li></ol></nav>
+    <p class="demo-kicker">Interactive research example</p>
+    <h1>DrugAgent evidence explorer</h1>
+    <p class="demo-lead">Inspect saved drug–target examples to see how machine learning (ML), a knowledge graph (KG), and literature retrieval (RAG) informed each recorded decision. Select a pair to compare the evidence sources.</p>
+    <p class="demo-footnote"><strong>Saved results only.</strong> This page does not run a new prediction or contact an LLM. Labels and confidence are displayed as recorded; they have not been independently verified here. They are not clinical guidance.</p>
+
+    <section class="demo-panel" aria-labelledby="choose-heading">
+      <h2 id="choose-heading">Choose a drug–target pair</h2>
+      <label for="pair-select" class="demo-label">Recorded example</label>
+      <select id="pair-select" class="demo-select" disabled><option>Loading saved examples…</option></select>
+      <p id="status" class="demo-muted" role="status" aria-live="polite">Loading data…</p>
+    </section>
+
+    <div id="result" hidden>
+      <section class="demo-panel" aria-labelledby="result-heading">
+        <p class="demo-label">Integrated conclusion</p><h2 id="result-heading"></h2>
+        <div id="meta" class="demo-meta"></div>
+        <h3>Why this label was recorded</h3><p id="fusion-reason" class="demo-copy"></p>
+        <h3>Reasoning and limitations</h3><p id="summary" class="demo-copy"></p>
+      </section>
+      <div id="evidence" class="demo-grid" aria-label="Evidence sources"></div>
+      <p class="demo-resource"><a id="source-link" class="demo-link" href="https://github.com/inoue0426/DrugAgent">View original saved evidence on GitHub →</a></p>
+    </div>
+    <p class="demo-footnote">For the method and code, see <a href="https://github.com/inoue0426/DrugAgent">DrugAgent on GitHub</a>. The source repository documents the assets and credentials needed for new predictions.</p>
+  </main>
+  <script src="../assets/main.js?v=10" defer></script>
+  <script>
+    'use strict';
+    const selector = document.getElementById('pair-select');
+    const status = document.getElementById('status');
+    const result = document.getElementById('result');
+    let examples = [];
+
+    function node(tag, className, value) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (value != null) element.textContent = String(value);
+      return element;
+    }
+    function show(index) {
+      const record = examples[index];
+      if (!record) return;
+      selector.value = String(index);
+      document.getElementById('result-heading').textContent = `${record.drug} → ${record.target}`;
+      document.getElementById('fusion-reason').textContent = record.fusion_reason || 'Not recorded.';
+      document.getElementById('summary').textContent = record.summary || 'Not recorded.';
+      const meta = document.getElementById('meta');
+      meta.replaceChildren(node('span','demo-chip',`Combined label: ${record.label || 'Unknown'}`), node('span','demo-chip',`Reported confidence: ${record.confidence || 'Unknown'}`));
+      const evidence = document.getElementById('evidence');
+      evidence.replaceChildren();
+      for (const item of record.evidence) {
+        const card = node('section','demo-panel');
+        card.append(node('p','demo-label', item.kind === 'ML' ? 'Machine learning' : item.kind === 'KG' ? 'Knowledge graph' : 'Literature retrieval'));
+        card.append(node('h3','',item.label || 'Unknown'));
+        if (item.kind === 'ML' && item.pkd !== null) card.append(node('p','demo-muted',`Predicted pKd: ${item.pkd.toFixed(3)}`));
+        if (item.kind === 'KG' && typeof item.direct === 'boolean') card.append(node('p','demo-muted',`Direct graph edge reported: ${item.direct ? 'Yes' : 'No'}`));
+        card.append(node('p','demo-copy',item.reason || 'No explanation recorded.'));
+        if (item.kind === 'RAG') {
+          if (item.hypothesis) card.append(node('p','demo-copy',`Hypothesis: ${item.hypothesis}`));
+          if (item.pmc_ids.length) {
+            const refs = node('p','demo-footnote','Retrieved articles: ');
+            item.pmc_ids.forEach((id, i) => {
+              const a = node('a','',id);
+              a.href = `https://pmc.ncbi.nlm.nih.gov/articles/${id}/`;
+              a.target = '_blank'; a.rel = 'noopener noreferrer';
+              if (i) refs.append(document.createTextNode(', '));
+              refs.append(a);
+            });
+            card.append(refs);
+          }
+        }
+        evidence.append(card);
+      }
+      document.getElementById('source-link').href = record.source;
+      status.textContent = `Showing saved result ${index + 1} of ${examples.length}.`;
+      result.hidden = false;
+      history.replaceState(null, '', `#example=${index + 1}`);
+    }
+    selector.addEventListener('change', () => show(Number(selector.value)));
+    fetch('examples.json')
+      .then(response => { if (!response.ok) throw Error('Data unavailable'); return response.json(); })
+      .then(data => {
+        if (!Array.isArray(data.examples) || !data.examples.length) throw Error('No saved examples');
+        examples = data.examples;
+        selector.replaceChildren();
+        examples.forEach((record, index) => {
+          const option = node('option','',`${record.drug} · ${record.target}`);
+          option.value = String(index);
+          selector.append(option);
+        });
+        selector.disabled = false;
+        const requested = Number(new URLSearchParams(location.hash.slice(1)).get('example')) - 1;
+        show(Number.isInteger(requested) && requested >= 0 && requested < examples.length ? requested : 0);
+      })
+      .catch(() => { status.textContent = 'Saved examples could not be loaded. Please try reloading the page.'; });
+  </script>
+</body>
+</html>
