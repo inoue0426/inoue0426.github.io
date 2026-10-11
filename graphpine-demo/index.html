@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore saved GraphPINE gene importance values for twelve drug and cell line pairs.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://inoue0426.github.io/graphpine-demo/">
+  <link rel="stylesheet" href="../assets/style.css?v=10">
+  <link rel="stylesheet" href="../assets/breadcrumbs.css">
+  <title>GraphPINE Gene Importance Explorer | Yoshitaka Inoue</title>
+  <style>
+    .explorer {max-width:1080px;margin:auto;padding:2.4rem 1.2rem 5rem}
+    .explorer-lead {max-width:780px;color:#43536a;line-height:1.7}
+    .explorer-kicker {font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#346b77}
+    .explorer-panel {background:#fff;border:1px solid #dce5e9;border-radius:18px;padding:1.5rem;margin-top:1.5rem;box-shadow:0 12px 40px rgba(28,48,65,.06)}
+    .explorer-panel h2 {margin-top:0}
+    .explorer-note {padding:1rem 1.2rem;background:#f3f7f9;border-left:4px solid #346b77;border-radius:8px;line-height:1.65}
+    .explorer-controls {display:grid;grid-template-columns:2fr 1fr;gap:1rem;align-items:end}
+    .explorer-control label {display:block;font-size:.82rem;font-weight:700;color:#43536a;margin-bottom:.3rem}
+    .explorer-control select,.explorer-control input {width:100%;min-height:46px;padding:.65rem .8rem;border:1px solid #a9bac3;border-radius:9px;background:white;color:#173142;font:inherit}
+    .explorer-control select:focus-visible,.explorer-control input:focus-visible,a:focus-visible {outline:3px solid #257b8a;outline-offset:3px}
+    .explorer-meta {display:flex;flex-wrap:wrap;gap:.6rem;margin:0 0 1.1rem}
+    .explorer-tag {padding:.28rem .65rem;background:#e9f3f2;color:#174f58;border-radius:99px;font-size:.85rem;font-weight:700}
+    .explorer-muted {color:#526272}
+    .explorer-bars {list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.72rem}
+    .explorer-bars li {display:grid;grid-template-columns:2rem 7rem minmax(0,1fr) 3.8rem;gap:.6rem;align-items:center;font-variant-numeric:tabular-nums}
+    .explorer-rank,.explorer-value {color:#516274;font-size:.9rem}
+    .explorer-gene {font-weight:700;overflow-wrap:anywhere}
+    .explorer-track {height:12px;background:#e9eff2;border-radius:99px;overflow:hidden}
+    .explorer-fill {display:block;height:100%;background:linear-gradient(90deg,#267c86,#225188);border-radius:99px}
+    .explorer-search-result {min-height:2.5rem;margin:.8rem 0 0;line-height:1.6}
+    .explorer-footnote {font-size:.9rem;line-height:1.65;color:#516274}
+    [hidden] {display:none!important}
+    @media(max-width:680px){.explorer{padding:1.6rem 1rem 4rem}.explorer-controls{grid-template-columns:1fr}.explorer-bars li{grid-template-columns:1.6rem 5.6rem minmax(0,1fr) 3rem;gap:.35rem;font-size:.85rem}.explorer-panel{padding:1.1rem}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container nav-wrap">
+    <a class="brand" href="../">Yoshitaka Inoue</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav"><a href="../#research">Research</a><a href="../projects.html">Projects</a><a href="../publications/">Publications</a><a href="../service.html">Service</a></nav>
+  </div></header>
+  <main class="explorer">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../projects.html">Projects</a></li><li aria-current="page">GraphPINE demo</li></ol></nav>
+    <p class="explorer-kicker">Interactive research example</p>
+    <h1>GraphPINE gene importance explorer</h1>
+    <p class="explorer-lead">Explore recorded gene importance values for 12 drug–cell line pairs from the GraphPINE repository. Choose a pair to see its highest-ranked genes, or look up a gene by symbol.</p>
+    <p class="explorer-note"><strong>Saved values only.</strong> This page does not run GraphPINE or show drug-response predictions. An importance value ranks a gene within an example; it is not a probability, a measured treatment response, or proof that the gene causes sensitivity. Train, validation, and test labels are copied from the source CSV and do not independently establish a held-out evaluation.</p>
+
+    <section class="explorer-panel" aria-labelledby="choose-heading">
+      <h2 id="choose-heading">Choose an example</h2>
+      <div class="explorer-controls">
+        <div class="explorer-control"><label for="pair">Drug and cell line</label><select id="pair" disabled><option>Loading examples…</option></select></div>
+        <div class="explorer-control"><label for="count">Genes in chart</label><select id="count"><option value="10">Top 10</option><option value="20" selected>Top 20</option><option value="40">Top 40</option></select></div>
+      </div>
+      <p id="status" class="explorer-muted" role="status" aria-live="polite">Loading saved values…</p>
+    </section>
+
+    <div id="results" hidden>
+      <section class="explorer-panel" aria-labelledby="ranking-heading">
+        <h2 id="ranking-heading">Gene importance ranking</h2>
+        <div id="meta" class="explorer-meta"></div>
+        <p class="explorer-footnote">Bars use the saved values (0–1) for the selected example. Rankings across different pairs should not be treated as comparable effect sizes.</p>
+        <ol id="ranking" class="explorer-bars"></ol>
+      </section>
+      <section class="explorer-panel" aria-labelledby="lookup-heading">
+        <h2 id="lookup-heading">Find a gene in this example</h2>
+        <div class="explorer-control"><label for="gene">Gene symbol (for example, BRAF or TP53)</label><input id="gene" type="search" placeholder="Enter an exact gene symbol" autocomplete="off"></div>
+        <p id="lookup" class="explorer-search-result explorer-muted" role="status" aria-live="polite">Enter a gene symbol to see its rank and saved value.</p>
+      </section>
+    </div>
+    <p class="explorer-footnote">Source: <a href="https://github.com/inoue0426/GraphPINE/blob/b58ad00ce10d64608e8e2f83eb05f92e12c0c096/data/importance.csv">GraphPINE saved importance CSV (fixed revision)</a>. Values are displayed to four decimal places. For the model and original notebook, see the <a href="https://github.com/inoue0426/GraphPINE">GraphPINE repository</a>. Research use only.</p>
+  </main>
+  <script src="../assets/main.js?v=10" defer></script>
+  <script>
+    const pair = document.getElementById('pair');
+    const count = document.getElementById('count');
+    const status = document.getElementById('status');
+    const ranking = document.getElementById('ranking');
+    const lookup = document.getElementById('lookup');
+    const geneInput = document.getElementById('gene');
+    const genes = [];
+    let examples = [];
+    let selected = 0;
+    const element = (tag, className, value) => { const el = document.createElement(tag); if (className) el.className = className; if (value !== undefined) el.textContent = value; return el; };
+    const displayName = (record) => `${record.drug} · ${record.cell}`;
+
+    function showGene() {
+      const query = geneInput.value.trim().toUpperCase();
+      if (!query) { lookup.textContent = 'Enter a gene symbol to see its rank and saved value.'; return; }
+      const index = genes.findIndex(name => name.toUpperCase() === query);
+      if (index < 0) { lookup.textContent = `No exact match for “${geneInput.value.trim()}” in the source gene list.`; return; }
+      const scores = examples[selected].scores;
+      const rank = scores.reduce((countAbove, value) => countAbove + (value > scores[index] ? 1 : 0), 0) + 1;
+      lookup.textContent = `${genes[index]}: rank ${rank} of ${genes.length}; saved importance ${scores[index].toFixed(4)}. Equal values share a rank.`;
+    }
+
+    function show(index) {
+      selected = index;
+      pair.value = String(index);
+      const record = examples[index];
+      const meta = document.getElementById('meta');
+      meta.replaceChildren();
+      [record.drug, `Cell line: ${record.cell}`, `NSC ${record.nsc}`, `Source split: ${record.split}`].forEach(value => meta.append(element('span', 'explorer-tag', value)));
+      const ordered = record.scores.map((value, geneIndex) => ({value, geneIndex})).sort((a,b) => b.value - a.value || a.geneIndex - b.geneIndex);
+      ranking.replaceChildren();
+      ordered.slice(0, Number(count.value)).forEach(({value, geneIndex}, position) => {
+        const li = element('li');
+        const track = element('span', 'explorer-track');
+        const fill = element('span', 'explorer-fill');
+        fill.style.width = `${Math.max(0, Math.min(100, value * 100))}%`;
+        track.append(fill);
+        li.append(element('span', 'explorer-rank', String(position + 1)), element('span', 'explorer-gene', genes[geneIndex]), track, element('span', 'explorer-value', value.toFixed(4)));
+        li.setAttribute('aria-label', `Rank ${position + 1}, ${genes[geneIndex]}, importance ${value.toFixed(4)}`);
+        ranking.append(li);
+      });
+      status.textContent = `Showing saved example ${index + 1} of ${examples.length}.`;
+      document.getElementById('results').hidden = false;
+      showGene();
+      history.replaceState(null, '', `#example=${index + 1}`);
+    }
+
+    pair.addEventListener('change', () => show(Number(pair.value)));
+    count.addEventListener('change', () => { if (examples.length) show(selected); });
+    geneInput.addEventListener('input', showGene);
+    fetch('examples.json').then(response => { if (!response.ok) throw Error('Data unavailable'); return response.json(); }).then(data => {
+      if (!Array.isArray(data.genes) || !Array.isArray(data.examples) || data.examples.length === 0 || data.examples.some(record => record.scores.length !== data.genes.length)) throw Error('Invalid saved data');
+      genes.push(...data.genes);
+      examples = data.examples;
+      pair.replaceChildren();
+      examples.forEach((record, index) => { const option = element('option', '', displayName(record)); option.value = String(index); pair.append(option); });
+      pair.disabled = false;
+      const requested = Number(new URLSearchParams(location.hash.slice(1)).get('example')) - 1;
+      show(Number.isInteger(requested) && requested >= 0 && requested < examples.length ? requested : 0);
+    }).catch(() => { status.textContent = 'Saved values could not be loaded. Please try reloading the page.'; });
+  </script>
+</body>
+</html>
