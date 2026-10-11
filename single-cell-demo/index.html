@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore saved scVGAE and scBiGCN notebook examples of single-cell gene expression reconstruction.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://inoue0426.github.io/single-cell-demo/">
+  <link rel="stylesheet" href="../assets/style.css?v=10">
+  <link rel="stylesheet" href="../assets/breadcrumbs.css">
+  <title>scVGAE & scBiGCN Notebook Explorer | Yoshitaka Inoue</title>
+  <style>
+    .sc-shell {max-width:1080px;margin:auto;padding:2.4rem 1.2rem 5rem}
+    .sc-lead {max-width:800px;color:#43536a;line-height:1.7}
+    .sc-kicker {font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#346b77}
+    .sc-panel {background:#fff;border:1px solid #dce5e9;border-radius:18px;padding:1.5rem;margin-top:1.5rem;box-shadow:0 12px 40px rgba(28,48,65,.06)}
+    .sc-panel h2 {margin-top:0}
+    .sc-note {background:#f3f7f9;border-left:4px solid #346b77;border-radius:8px;padding:1rem 1.2rem;line-height:1.65}
+    .sc-controls {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem}
+    .sc-control label {display:block;font-weight:700;color:#43536a;font-size:.87rem;margin-bottom:.35rem}
+    .sc-control select {width:100%;min-height:46px;padding:.65rem .8rem;border:1px solid #a9bac3;border-radius:9px;background:white;color:#173142;font:inherit}
+    .sc-control select:focus-visible,a:focus-visible,button:focus-visible {outline:3px solid #257b8a;outline-offset:3px}
+    .sc-table-wrap {overflow-x:auto}
+    .sc-table {width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;min-width:580px}
+    .sc-table th,.sc-table td {text-align:right;border-bottom:1px solid #e3e9ec;padding:.72rem .8rem}
+    .sc-table th:first-child,.sc-table td:first-child {text-align:left}
+    .sc-table thead th {background:#f3f7f9;color:#324959;font-size:.85rem}
+    .sc-table tbody tr:hover,.sc-table tbody tr.active {background:#ecf6f5}
+    .sc-gene {font:inherit;font-weight:700;color:#1c4f87;background:none;border:0;text-decoration:underline;text-underline-offset:.2em;cursor:pointer;padding:0}
+    .sc-negative {color:#a14538}
+    .sc-detail {min-height:2.5rem;line-height:1.7}
+    .sc-footnote {font-size:.9rem;line-height:1.65;color:#526272}
+    [hidden] {display:none!important}
+    @media(max-width:650px){.sc-shell{padding:1.6rem 1rem 4rem}.sc-controls{grid-template-columns:1fr}.sc-panel{padding:1.1rem}}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container nav-wrap">
+    <a class="brand" href="../">Yoshitaka Inoue</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav"><a href="../#research">Research</a><a href="../projects.html">Projects</a><a href="../publications/">Publications</a><a href="../service.html">Service</a></nav>
+  </div></header>
+  <main class="sc-shell">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../">Home</a></li><li><a href="../projects.html">Projects</a></li><li aria-current="page">Single-cell demos</li></ol></nav>
+    <p class="sc-kicker">Interactive saved notebook examples</p>
+    <h1>Single-cell reconstruction: scVGAE &amp; scBiGCN</h1>
+    <p class="sc-lead">Inspect the same sample expression matrix as it appears in two published tutorials. Switch methods and cell rows to see recorded raw counts, each notebook's processed input, and its saved reconstruction output for six displayed genes.</p>
+    <p class="sc-note"><strong>Notebook excerpts only.</strong> The notebooks display only the first and last few rows and columns of their outputs. This page shows six gene columns for the first three cell rows, not the full reconstruction. It does not train models or impute uploaded data. scVGAE and scBiGCN use different preprocessing and model settings; their output values are not directly comparable. A zero count alone does not establish a missing measurement or ground truth.</p>
+
+    <section class="sc-panel" aria-labelledby="choose-heading">
+      <h2 id="choose-heading">Explore an example</h2>
+      <div class="sc-controls">
+        <div class="sc-control"><label for="method">Method</label><select id="method" disabled><option>Loading saved examples…</option></select></div>
+        <div class="sc-control"><label for="cell">Cell row from tutorial</label><select id="cell" disabled><option>Loading…</option></select></div>
+      </div>
+      <p id="status" class="sc-footnote" role="status" aria-live="polite">Loading saved notebook excerpts…</p>
+    </section>
+
+    <section id="result" class="sc-panel" aria-labelledby="table-heading" hidden>
+      <h2 id="table-heading">Recorded values</h2>
+      <p id="transform" class="sc-footnote"></p>
+      <div class="sc-table-wrap"><table class="sc-table"><thead><tr><th scope="col">Gene</th><th scope="col">Raw count</th><th scope="col">Processed input</th><th scope="col">Saved output</th></tr></thead><tbody id="values"></tbody></table></div>
+      <p id="detail" class="sc-detail" role="status" aria-live="polite"></p>
+      <p class="sc-footnote">Negative reconstruction values are displayed exactly as saved in the notebook. They are not valid raw expression counts; no zero clipping or inverse transform is applied here.</p>
+    </section>
+
+    <p class="sc-footnote">Sources: <a id="source-link" href="https://github.com/inoue0426/scVGAE/blob/main/Tutorial.ipynb">selected method's saved notebook</a> · <a href="https://github.com/inoue0426/scVGAE">scVGAE code</a> · <a href="https://github.com/inoue0426/scBiGCN">scBiGCN code</a>. Displayed numbers are recorded examples, not accuracy estimates or independently reproduced results. Research use only.</p>
+  </main>
+  <script src="../assets/main.js?v=10" defer></script>
+  <script>
+    const methodSelect = document.getElementById('method');
+    const cellSelect = document.getElementById('cell');
+    const status = document.getElementById('status');
+    const tbody = document.getElementById('values');
+    const detail = document.getElementById('detail');
+    let examples = [];
+    let selectedGene = 0;
+    const create = (tag, value) => { const el = document.createElement(tag); if (value !== undefined) el.textContent = value; return el; };
+    const format = value => Number(value).toFixed(4);
+
+    function showGene(index) {
+      selectedGene = index;
+      const record = examples[Number(methodSelect.value)];
+      const cell = record.cells[Number(cellSelect.value)];
+      detail.textContent = `${record.genes[index]} in ${cell.label}: raw ${cell.raw[index]}, processed input ${format(cell.input[index])}, saved output ${format(cell.output[index])}.`;
+      [...tbody.children].forEach((row, rowIndex) => row.classList.toggle('active', rowIndex === index));
+    }
+
+    function show() {
+      const record = examples[Number(methodSelect.value)];
+      const cell = record.cells[Number(cellSelect.value)];
+      document.getElementById('transform').textContent = `${record.method} input: ${record.inputTransform}`;
+      document.getElementById('source-link').href = record.source;
+      tbody.replaceChildren();
+      record.genes.forEach((gene, index) => {
+        const row = create('tr');
+        const name = create('th'); name.scope = 'row';
+        const button = create('button', gene); button.type = 'button'; button.className = 'sc-gene';
+        button.addEventListener('click', () => showGene(index));
+        name.append(button);
+        const raw = create('td', String(cell.raw[index]));
+        const input = create('td', format(cell.input[index]));
+        const output = create('td', format(cell.output[index]));
+        if (cell.output[index] < 0) output.className = 'sc-negative';
+        row.append(name, raw, input, output);
+        tbody.append(row);
+      });
+      showGene(selectedGene);
+      document.getElementById('result').hidden = false;
+      status.textContent = `Showing ${record.method}, ${cell.label}.`;
+      history.replaceState(null, '', `#method=${encodeURIComponent(record.method)}&cell=${Number(cellSelect.value) + 1}`);
+    }
+
+    methodSelect.addEventListener('change', () => {
+      const record = examples[Number(methodSelect.value)];
+      cellSelect.replaceChildren();
+      record.cells.forEach((cell, index) => { const option = create('option', cell.label); option.value = String(index); cellSelect.append(option); });
+      cellSelect.disabled = false;
+      selectedGene = 0;
+      show();
+    });
+    cellSelect.addEventListener('change', show);
+
+    fetch('examples.json').then(response => { if (!response.ok) throw Error('Data unavailable'); return response.json(); }).then(data => {
+      if (!Array.isArray(data.examples) || data.examples.length !== 2 || data.examples.some(record => !record.cells?.length || record.cells.some(cell => [cell.raw,cell.input,cell.output].some(v => v.length !== record.genes.length)))) throw Error('Invalid saved data');
+      examples = data.examples;
+      methodSelect.replaceChildren();
+      examples.forEach((record, index) => { const option = create('option', record.method); option.value = String(index); methodSelect.append(option); });
+      methodSelect.disabled = false;
+      const params = new URLSearchParams(location.hash.slice(1));
+      const methodIndex = Math.max(0, examples.findIndex(record => record.method.toLowerCase() === (params.get('method') || '').toLowerCase()));
+      methodSelect.value = String(methodIndex);
+      const record = examples[methodIndex];
+      cellSelect.replaceChildren();
+      record.cells.forEach((cell, index) => { const option = create('option', cell.label); option.value = String(index); cellSelect.append(option); });
+      cellSelect.disabled = false;
+      const requested = Number(params.get('cell')) - 1;
+      cellSelect.value = String(Number.isInteger(requested) && requested >= 0 && requested < record.cells.length ? requested : 0);
+      show();
+    }).catch(() => { status.textContent = 'Saved notebook excerpts could not be loaded. Please try reloading the page.'; });
+  </script>
+</body>
+</html>
