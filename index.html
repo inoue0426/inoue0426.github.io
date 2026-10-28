@@ -17,7 +17,7 @@
   <meta name="author" content="Yoshitaka Inoue">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://inoue0426.github.io/">
-  <link rel="stylesheet" href="assets/style.css?v=10">
+  <link rel="stylesheet" href="assets/style.css?v=11">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://inoue0426.github.io/#person","name":"Yoshitaka Inoue","url":"https://inoue0426.github.io/","jobTitle":"PhD Candidate and Pre-doctoral Fellow","email":"mailto:inoue.yoshitaka.iv1@gmail.com","affiliation":[{"@type":"Organization","name":"University of Minnesota"},{"@type":"Organization","name":"National Library of Medicine / National Cancer Institute"}],"sameAs":["https://scholar.google.co.jp/citations?user=aBizyLkAAAAJ&hl=en","https://orcid.org/0000-0003-4432-8166","https://github.com/inoue0426","https://www.linkedin.com/in/inoue0426/"]},{"@type":"WebSite","url":"https://inoue0426.github.io/","name":"Yoshitaka Inoue — Research Portfolio","author":{"@id":"https://inoue0426.github.io/#person"}}]}</script>
 </head>
@@ -130,17 +130,31 @@
     </div>
   </section>
 
-  <section class="section news-strip">
+  <section class="section news-strip" aria-labelledby="recent-heading">
     <div class="container news-inner">
-      <p class="section-label">Recent</p>
-      <div class="news-list">
-        <p><strong>GraphPINE</strong> accepted for presentation at the Network Science &amp; Artificial Intelligence for Biomedicine &amp; Health Informatics (Net-AI-BHI), IEEE BIBM 2026, in Dallas. <a href="publications/#graphpine-net-ai-bhi">Details →</a></p>
-        <p><strong>IEEE BIBM 2026</strong> paper on glioblastoma therapeutic candidate prioritization accepted at the <em>6th Biomedical Informatics Applications in Translational Research and Rare Diseases</em> workshop. <a href="publications/#bibm-2026-glioblastoma">Details →</a></p>
-        <p><strong>PerturbRx</strong> preprint released.</p>
-        <p><strong>ISMB 2026</strong> oral presentations for drGT and DrugAgent.</p>
-        <p><strong>CCR-FYI 2026</strong> Outstanding Postgraduate Fellow finalist.</p>
+      <div class="news-heading">
+        <h2 class="section-label" id="recent-heading">Recent</h2>
+        <a href="news.html">All news <span aria-hidden="true">→</span></a>
       </div>
-      <a href="news.html">All news →</a>
+      <div class="news-list">
+        <article class="news-item">
+          <p class="news-meta">IEEE BIBM 2026 · Net-AI-BHI</p>
+          <h3>GraphPINE accepted for presentation</h3>
+          <p>Interpretable drug-response prediction with graph importance propagation.</p>
+          <a href="publications/#graphpine-net-ai-bhi" aria-label="Publication details for GraphPINE">Publication details <span aria-hidden="true">→</span></a>
+        </article>
+        <article class="news-item">
+          <p class="news-meta">IEEE BIBM 2026 · Workshop</p>
+          <h3>Glioblastoma research paper accepted</h3>
+          <p>Prioritizing therapeutic candidates with high-throughput screening and biological annotations.</p>
+          <a href="publications/#bibm-2026-glioblastoma" aria-label="Publication details for glioblastoma research">Publication details <span aria-hidden="true">→</span></a>
+        </article>
+      </div>
+      <ul class="news-highlights" aria-label="More research updates">
+        <li><strong>PerturbRx</strong><span>Preprint released</span></li>
+        <li><strong>ISMB 2026</strong><span>drGT &amp; DrugAgent oral presentations</span></li>
+        <li><strong>CCR-FYI 2026</strong><span>Outstanding Postgraduate Fellow finalist</span></li>
+      </ul>
     </div>
   </section>
 </main>
