@@ -29,10 +29,8 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav">
       <a href="#research">Research</a>
-      <a href="research-interests/">Interests</a>
       <a href="projects.html">Projects</a>
       <a href="publications/">Publications</a>
-      <a href="https://inoue0426.github.io/research_statement/">Research Statement</a>
       <a href="https://inoue0426.github.io/cv_postdoc/Yoshitaka_Inoue_CV.pdf" target="_blank" rel="noopener">CV</a>
     </nav>
   </div>
@@ -40,23 +38,18 @@
 
 <main id="main">
   <section class="hero" id="top">
-    <div class="container hero-copy">
+    <div class="container hero-copy hero-copy-simple">
       <div class="hero-text">
-        <p class="eyebrow">Yoshitaka Inoue · UMN / NIH</p>
-        <h1>Learning how biological systems respond to therapeutic intervention.</h1>
-        <p class="lead">I develop AI models of treatment-conditioned biological state transitions, with the goal of transferring what we learn from molecular and cellular perturbations to patient-level therapeutic response.</p>
+        <p class="eyebrow">Yoshitaka Inoue</p>
+        <h1>AI for understanding and predicting therapeutic response.</h1>
+        <p class="lead">I study how biological systems change after treatment, and build models that connect perturbation data to patient-level response.</p>
+        <p class="hero-meta">PhD Candidate in Computer Science &amp; Engineering, University of Minnesota<br>Pre-doctoral Fellow, National Library of Medicine / National Cancer Institute</p>
         <div class="actions">
           <a class="button primary" href="https://inoue0426.github.io/research_statement/" target="_blank" rel="noopener">Research Statement</a>
-          <a class="button" href="publications/">Publications</a>
+          <a class="button" href="projects.html">Selected work</a>
           <a class="button" href="https://inoue0426.github.io/cv_postdoc/Yoshitaka_Inoue_CV.pdf" target="_blank" rel="noopener">CV</a>
         </div>
       </div>
-      <aside class="hero-profile-card" aria-label="Yoshitaka Inoue profile">
-        <img class="profile-photo" src="assets/profile.jpg" alt="Portrait of Yoshitaka Inoue" width="320" height="320" loading="eager" decoding="async">
-        <h2>Yoshitaka Inoue</h2>
-        <p><strong>PhD Candidate</strong><br>Computer Science and Engineering<br>University of Minnesota</p>
-        <p><strong>Pre-doctoral Fellow</strong><br>National Library of Medicine / National Cancer Institute</p>
-      </aside>
     </div>
   </section>
 
@@ -64,28 +57,15 @@
     <div class="container">
       <div class="section-intro">
         <p class="section-label">Research</p>
-        <h2>Modeling biological dynamics under intervention</h2>
-        <p>My central question is how a biological system changes after an intervention—and which aspects of those dynamics are transferable across drugs, cellular contexts, modalities, and patients.</p>
+        <h2>How does treatment change a biological system?</h2>
+        <p>My research develops transferable models of treatment-conditioned state changes, from molecular and cellular perturbations to therapeutic response in patients.</p>
       </div>
 
-      <figure class="research-map" aria-labelledby="research-map-caption">
-        <div class="map-inputs">
-          <div class="map-node quiet"><span>Biological state<br>&amp; context</span></div>
-          <span class="map-plus">+</span>
-          <div class="map-node quiet"><span>Therapeutic<br>intervention</span></div>
-        </div>
-        <span class="map-arrow" aria-hidden="true">→</span>
-        <div class="map-node focal"><span>State transition<br>&amp; dynamics</span></div>
-        <span class="map-arrow" aria-hidden="true">→</span>
-        <div class="map-outcomes">
-          <span>Transfer across contexts</span>
-          <span>Predict therapeutic response</span>
-          <span>Reason about mechanism &amp; evidence</span>
-        </div>
-        <span class="map-arrow" aria-hidden="true">→</span>
-        <div class="map-node final"><span>Better intervention<br>models</span></div>
-        <figcaption id="research-map-caption">A research program for learning transferable, intervention-conditioned models of biological state change and connecting those predictions to mechanism and evidence across cellular and patient contexts.</figcaption>
-      </figure>
+      <div class="research-points">
+        <article><span class="research-point-number">01</span><h3>Learn from perturbations</h3><p>Model how drugs and interventions move cells through biological states.</p></article>
+        <article><span class="research-point-number">02</span><h3>Transfer across contexts</h3><p>Find what remains reliable across drugs, cell types, modalities, and patients.</p></article>
+        <article><span class="research-point-number">03</span><h3>Support better decisions</h3><p>Connect predictions to mechanism, evidence, and therapeutic response.</p></article>
+      </div>
     </div>
   </section>
 
@@ -116,63 +96,10 @@
     </div>
   </section>
 
-  <section id="interests" class="section interests-section">
-    <div class="container">
-      <div class="section-heading">
-        <div><p class="section-label">Research interests</p><h2>A map of the questions I keep returning to</h2></div>
-        <a href="research-interests/">Explore the full map →</a>
-      </div>
-      <p class="interests-intro">The emphasis is on predictive biological modeling: learning mechanisms from perturbations, understanding what transfers across contexts, and building reliable models for therapeutic decisions.</p>
-      <div class="interest-grid" aria-label="Research interest categories">
-        <article class="interest-card interest-card-goals"><p class="interest-kicker">01 · Scientific goals</p><h3>What should a model explain?</h3><ul><li>Predictive Biological Modeling</li><li>Mechanistic Understanding</li><li>Biological Mechanism Discovery</li><li>Therapeutic Intervention Design</li></ul></article>
-        <article class="interest-card interest-card-biology"><p class="interest-kicker">02 · Biological applications</p><h3>Where do interventions act?</h3><ul><li>Perturbation Modeling</li><li>Drug Response Prediction</li><li>Single-cell Genomics</li><li>Treatment Response</li><li>Multi-omics Integration</li><li>Spatial Transcriptomics</li></ul></article>
-        <article class="interest-card interest-card-theory"><p class="interest-kicker">03 · Causal &amp; generalization theory</p><h3>What can transfer?</h3><ul><li>Identifiability</li><li>Transferability</li><li>Causal Representation Learning</li><li>Molecular Causality</li><li>Domain Generalization</li><li>Compositional Generalization</li></ul></article>
-        <article class="interest-card interest-card-methods"><p class="interest-kicker">04 · Modeling &amp; reliability</p><h3>How do we know when to trust it?</h3><ul><li>World Models</li><li>Latent Dynamics</li><li>Uncertainty Quantification</li><li>Out-of-Distribution Robustness</li><li>Selective Prediction</li><li>Generative Modeling</li><li>Bayesian Modeling</li><li>Gaussian Processes</li></ul></article>
-      </div>
-      <p class="interest-note">Editorial emphasis based on the <a href="https://github.com/inoue0426/research_word_cloud" target="_blank" rel="noopener">research_word_cloud source project</a>; weights indicate relative prominence, not measured frequency.</p>
-    </div>
-  </section>
-
-  <section class="section publications-section">
-    <div class="container">
-      <div class="section-heading">
-        <div><p class="section-label">Selected publications</p><h2>Representative papers</h2></div>
-        <a href="publications/">All publications →</a>
-      </div>
-      <ol class="publication-list compact">
-        <li><span class="year">2026</span><div><strong>PerturbRx: Treatment-Conditioned Biological State Transitions for Drug Response Prediction</strong><p class="meta"><em>Preprint</em> · <a href="https://arxiv.org/abs/2608.21349">arXiv</a></p></div></li>
-        <li><span class="year">2026</span><div><strong>drGT: Interpretable Drug Response Prediction with Attention-Guided Gene Attribution on a Drug-Cell-Gene Heterogeneous Graph</strong><p class="meta"><em>BMC Bioinformatics</em> · <a href="https://doi.org/10.1186/s12859-026-06417-z">DOI</a> · <a href="https://github.com/inoue0426/drGT">Code</a></p></div></li>
-        <li><span class="year">2026</span><div><strong>DrugAgent: Reliable Multi-Agent Aggregation under Conflicting Biomedical Evidence</strong><p class="meta"><em>Scientific Reports</em>, under revision · <a href="https://arxiv.org/abs/2408.13378">Preprint</a> · <a href="https://github.com/inoue0426/DrugAgent">Code</a></p></div></li>
-        <li><span class="year">2026</span><div><strong>TRPM4 Expression as a Predictive Biomarker and a Mechanistic Driver of Acetalax Activity in Prostate Cancer: Preclinical Efficacy Studies</strong><p class="meta"><em>Molecular Cancer Therapeutics</em> · <a href="https://doi.org/10.1158/1535-7163.MCT-26-0011">DOI</a></p></div></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section news-strip" aria-labelledby="recent-heading">
-    <div class="container news-inner">
-      <div class="news-heading">
-        <h2 class="section-label" id="recent-heading">Recent</h2>
-        <a href="news.html">All news <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="news-list">
-        <article class="news-item">
-          <p class="news-meta">IEEE BIBM 2026 · Net-AI-BHI</p>
-          <h3>GraphPINE accepted for presentation</h3>
-          <p>Interpretable drug-response prediction with graph importance propagation.</p>
-          <a href="publications/#graphpine-net-ai-bhi" aria-label="Publication details for GraphPINE">Publication details <span aria-hidden="true">→</span></a>
-        </article>
-        <article class="news-item">
-          <p class="news-meta">IEEE BIBM 2026 · Workshop</p>
-          <h3>Glioblastoma research paper accepted</h3>
-          <p>Prioritizing therapeutic candidates with high-throughput screening and biological annotations.</p>
-          <a href="publications/#bibm-2026-glioblastoma" aria-label="Publication details for glioblastoma research">Publication details <span aria-hidden="true">→</span></a>
-        </article>
-      </div>
-      <ul class="news-highlights" aria-label="More research updates">
-        <li><strong>PerturbRx</strong><span>Preprint released</span></li>
-        <li><strong>ISMB 2026</strong><span>drGT &amp; DrugAgent oral presentations</span></li>
-        <li><strong>CCR-FYI 2026</strong><span>Outstanding Postgraduate Fellow finalist</span></li>
-      </ul>
+  <section class="section home-footer-links">
+    <div class="container home-footer-links-inner">
+      <p>Explore the <a href="publications/">publication record</a> or <a href="projects.html">all projects</a>.</p>
+      <a href="https://github.com/inoue0426" target="_blank" rel="noopener">GitHub profile ↗</a>
     </div>
   </section>
 </main>
